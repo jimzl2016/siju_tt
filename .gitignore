@@ -1,0 +1,14 @@
+# 工作区数据（非项目内容）
+.workbuddy/
+
+# 压缩包（与 六类数据看板/ 内容重复）
+*.zip
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.tmp
+*.log

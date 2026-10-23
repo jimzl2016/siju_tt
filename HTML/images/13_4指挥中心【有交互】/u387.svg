@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="116px" height="80px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter x="3182px" y="451px" width="116px" height="80px" filterUnits="userSpaceOnUse" id="filter685">
+      <feOffset dx="0" dy="5" in="SourceAlpha" result="shadowOffsetInner" />
+      <feGaussianBlur stdDeviation="0" in="shadowOffsetInner" result="shadowGaussian" />
+      <feComposite in2="shadowGaussian" operator="atop" in="SourceAlpha" result="shadowComposite" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0.192156862745098  0 0 0 0 0.192156862745098  0 0 0 0 0.192156862745098  0 0 0 0.349019607843137 0  " in="shadowComposite" />
+    </filter>
+    <g id="widget686">
+      <path d="M 3287.32146142804 467.44575652412  C 3293.91280829123 473.63636605967  3297.5 480.97040171559  3297.5 488.5  C 3297.5 509.032137790046  3271.60541528365 525.5  3240 525.5  C 3208.39458471635 525.5  3182.5 509.032137790046  3182.5 488.5  C 3182.5 482.128359453475  3185.06993828368 475.875089779856  3189.88531590891 470.326549408971  L 3239.82514204354 488.9684278974  A 0.5 0.5 0 0 0 3240.20765102098 488.954841789513 L 3287.32146142774 467.445756523838  Z " fill-rule="nonzero" fill="#f1f6fc" stroke="none" />
+      <path d="M 3287.32146142804 467.44575652412  C 3293.91280829123 473.63636605967  3297.5 480.97040171559  3297.5 488.5  C 3297.5 509.032137790046  3271.60541528365 525.5  3240 525.5  C 3208.39458471635 525.5  3182.5 509.032137790046  3182.5 488.5  C 3182.5 482.128359453475  3185.06993828368 475.875089779856  3189.88531590891 470.326549408971  L 3239.82514204354 488.9684278974  A 0.5 0.5 0 0 0 3240.20765102098 488.954841789513 L 3287.32146142774 467.445756523838  Z " stroke-width="1" stroke="#797979" fill="none" />
+    </g>
+  </defs>
+  <g transform="matrix(1 0 0 1 -3182 -451 )">
+    <use xlink:href="#widget686" filter="url(#filter685)" />
+    <use xlink:href="#widget686" />
+  </g>
+</svg>
