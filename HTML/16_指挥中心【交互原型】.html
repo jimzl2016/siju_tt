@@ -17,7 +17,7 @@ img{user-select:none}
 
 /* ============ 顶栏 ============ */
 #topbar{height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;
-  background:#10254A;border-bottom:1px solid #0D2242;position:relative;z-index:20}
+  background:#10254A url("images/header_bg.png") center/100% 100% no-repeat;border-bottom:1px solid #0D2242;position:relative;z-index:20}
 .brand{display:flex;align-items:center;gap:8px;width:23%}
 .brand img{width:24px;height:24px;border-radius:3px}
 .brand .name{font-size:12.5px;font-weight:600;letter-spacing:.5px}
@@ -49,7 +49,8 @@ img{user-select:none}
 .card{background:#10254A;border:1px solid #1E4470;border-radius:6px;display:flex;flex-direction:column;
   overflow:hidden;min-height:0;position:relative}
 .card-h{height:24px;flex:none;display:flex;align-items:center;justify-content:space-between;
-  padding:0 9px;border-bottom:1px solid #132B4C;background:linear-gradient(180deg,#1B3D6E 0%,#142D54 100%);
+  padding:0 9px;border-bottom:1px solid #132B4C;
+  background:linear-gradient(180deg,#1B3D6E 0%,#142D54 100%) url("images/mod_head.png") center/100% 100% no-repeat;
   box-shadow:inset 0 1px 0 rgba(46,163,255,.16)}
 .card-h .t{font-size:11.5px;font-weight:600;color:#EAF3FF;display:flex;align-items:center;gap:5px;white-space:nowrap}
 .card-h .t::before{content:"❖";color:#2EA3FF;font-size:9px}
@@ -383,7 +384,8 @@ img{user-select:none}
 .pdtab.on{background:linear-gradient(180deg,#2EA3FF 0%,#1D6FE0 100%);border-color:#2EA3FF;
   color:#04223A;font-weight:700;box-shadow:0 0 9px rgba(46,163,255,.45)}
 #pdTabs .pd-src{margin-left:auto;font-size:8.5px;color:#6E92BC;font-variant-numeric:tabular-nums}
-#popupPanel{width:1896px;max-width:calc(100% - 24px)}
+/* 弹框宽度 7/13（1920×7/13≈1034，对应 3520 设计稿的 1896） */
+#popupPanel{width:1034px;max-width:calc(100% - 24px)}
 #popupBody{flex:1;min-height:0;padding:9px;display:block;overflow:hidden}
 .pd-page{display:none;height:100%;min-height:0}
 .pd-page.on{display:grid;grid-template-columns:1fr 2fr 1fr;gap:7px}
@@ -402,9 +404,11 @@ img{user-select:none}
 .pdc-b.scroll::-webkit-scrollbar{width:4px}
 .pdc-b.scroll::-webkit-scrollbar-thumb{background:#1D4E89;border-radius:2px}
 .pdc-b>svg{flex:1;min-height:0;width:100%;display:block}
+.pdc-b .mtable{font-size:8px}
+.pdc-b .mtable th,.pdc-b .mtable td{padding:2px 2px}
 .pdc-b .hbar-row{margin:2px 0}
-.pdc-b .hbar-row .k{width:88px}
-.pdc-b .hbar-row .v{width:46px}
+.pdc-b .hbar-row .k{width:72px}
+.pdc-b .hbar-row .v{width:40px}
 .pd-kvlist.grid2{display:grid;grid-template-columns:1fr 1fr;gap:3px 16px}
 .pd-big{display:flex;align-items:baseline;gap:6px;flex:none}
 .pd-big b{font-size:22px;font-weight:700;color:#2EA3FF;line-height:1;font-variant-numeric:tabular-nums;
@@ -932,8 +936,8 @@ var MODULES = {
   /* ---------- 工作站（首页）：左栏随工位切换，右栏统计固定 ---------- */
   station:{ name:"工作站", key:"station",
     left:[
-      {t:"工序模拟", fx:1.02, type:"wsSim", noHead:true, noScroll:true},
-      {t:"当前任务", fx:1.14, type:"wsTask",
+      {t:"工序模拟", fx:3, type:"wsSim", noHead:true, noScroll:true},
+      {t:"当前任务", fx:2, type:"wsTask",
        hright:'<span class="link" id="wsDetail">生产详情 ›</span>'}
     ],
     right:[
@@ -2213,11 +2217,11 @@ function pageTask(s,D){
       '<div><span class="k">本班完成</span><b>'+s.output+' 块</b></div>'+
       '<div><span class="k">当前节拍</span><b style="font-size:9.5px">'+s.takt+'</b></div>'+
     '</div>'+
-    '<div class="pd-kvlist grid2" style="margin-top:4px">'+
-      '<div><span>工艺路线</span><b>ADV-'+s.code.split("-")[1]+' 模块墙板拼装线</b></div>'+
-      '<div><span>工装夹具</span><b>'+(D.dev.c||"—")+' 专用夹具</b></div>'+
-      '<div><span>定位精度 / 拼装点位</span><b>±0.5 mm / 24 点</b></div>'+
-      '<div><span>班组人数 / 上岗率</span><b>6 人 / 100%</b></div>'+
+    '<div class="pd-kvlist" style="margin-top:4px">'+
+      '<div><span>工艺路线</span><b>ADV-'+s.code.split("-")[1]+' 拼装线</b></div>'+
+      '<div><span>工装夹具</span><b>'+(D.dev.c||"—")+' 夹具</b></div>'+
+      '<div><span>定位精度</span><b>±0.5 mm · 24 点</b></div>'+
+      '<div><span>班组人数</span><b>6 人 · 上岗率 100%</b></div>'+
     '</div>';
 
   var params=[
@@ -2229,11 +2233,11 @@ function pageTask(s,D){
     [["养护温度"],["60±5 ℃"],["62 ℃"],["合格","good"]]
   ];
 
-  var mix=[["600×600 标准板",Math.round(s.output*0.55)+" 块",55,"#2EA3FF"],
-           ["600×1200 长板",Math.round(s.output*0.30)+" 块",30,"#00A17B"],
-           ["定制品 / 异型板",(s.output-Math.round(s.output*0.85))+" 块",15,"#E5B964"]];
+  var mix=[["标准板",Math.round(s.output*0.55)+" 块",55,"#2EA3FF"],
+           ["长板",Math.round(s.output*0.30)+" 块",30,"#00A17B"],
+           ["异型板",(s.output-Math.round(s.output*0.85))+" 块",15,"#E5B964"]];
 
-  var chart=chartBarsLine({w:920,h:206,labels:D.days,max:Math.round(s.plan*1.35),rmax:110,ticks:4,
+  var chart=chartBarsLine({w:500,h:198,labels:D.days,max:Math.round(s.plan*1.35),rmax:110,ticks:4,
     series:[{data:D.out7,color:"#2EA3FF"},{data:D.plan7,color:"#1B4C7E"}],
     line:{data:D.ratio7,color:"#00A17B"}})+
     legend([["实际产量","#2EA3FF"],["计划产量","#1B4C7E"],["达成率(%)","#00A17B"]]);
@@ -2250,7 +2254,7 @@ function pageTask(s,D){
     '</div>'+
     '<div class="pd-col">'+
       pdCard("关键工艺参数（实测 vs 标准）","在线采集",mtable(["参数","标准","实测","判定"],params),1.15)+
-      pdCard("当班产量结构",'共 '+s.output+' 块',hbars(mix),.9)+
+      pdCard("当班产量结构",'600×600 / 600×1200 / 异型 ',hbars(mix),.9)+
       pdCard("工步时序",s.task.start+" 起",'<div class="pd-list">'+tl+'</div>',1)+
     '</div>';
 }
@@ -2262,12 +2266,12 @@ function pageEquip(s,D){
     [s.run+" 台","运行中","good"],[s.wait+" 台","待机","warn"],
     [s.err+" 台","故障",s.err?"bad":"good"]]);
 
-  var donut='<div class="pd-donut-v">'+chartDonut({w:230,h:206,csize:17,ssize:8,
+  var donut='<div class="pd-donut-v">'+chartDonut({w:200,h:168,csize:17,ssize:8,
     segments:[{v:s.run,color:"#00A17B"},{v:s.wait,color:"#E5B964"},{v:Math.max(s.err,0.001),color:"#EB4949"}],
     center:s.online+"%",centerSub:"在线率"})+
     legend([["运行 "+s.run,"#00A17B"],["待机 "+s.wait,"#E5B964"],["故障 "+s.err,"#EB4949"]])+'</div>';
 
-  var trend=chartLines({w:920,h:206,labels:D.hrs,min:20,max:80,
+  var trend=chartLines({w:500,h:198,labels:D.hrs,min:20,max:80,
     series:[{data:D.load,color:"#2EA3FF",fill:true},{data:D.temp,color:"#E5B964"}]})+
     legend([["负载率(%)","#2EA3FF"],["主轴温度(℃)","#E5B964"]]);
 
@@ -2278,17 +2282,17 @@ function pageEquip(s,D){
     ["气动夹具单元","PN-90-014","工位本体","待机",6.4,s.oee-11],
     ["安全光栅","SG-40-003","工位周界","运行",12.0,99]
   ];
-  var tb=mtable(["设备名称","型号","位置","状态","运行(h)","OEE"],list.map(function(r){
-    return [[r[0]],[r[1]],[r[2]],[r[3],r[3]==="运行"?"good":"warn"],[r[4].toFixed(1)],[r[5]+"%"]];
+  var tb=mtable(["设备","型号","状态","OEE"],list.map(function(r){
+    return [[r[0]],[r[1]],[r[3],r[3]==="运行"?"good":"warn"],[r[5]+"%"]];
   }));
 
   var hb=[["主轴系统",96,"96%","#00A17B"],["伺服驱动",93,"93%","#2EA3FF"],["气动单元",88,"88%","#2EA3FF"],
           ["视觉系统",91,"91%","#00A17B"],["润滑状态",84,"84%","#E5B964"]];
-  var evts=[["16:12","主轴温度 68.4℃ 接近阈值","warn","关注"],
-            ["14:30","气动夹具压力波动 ±0.03MPa","warn","已调整"],
-            ["11:05","输送辊道皮带跑偏 2mm","","已处理"],
-            ["09:20","班前点检完成，润滑正常","","已完成"],
-            ["08:05","设备上电，通讯自检通过","","已完成"]];
+  var evts=[["16:12","主轴温度 68.4℃ 偏高","warn","关注"],
+            ["14:30","气动夹具压力波动","warn","已调整"],
+            ["11:05","输送辊道跑偏 2mm","","已处理"],
+            ["09:20","班前点检完成","","已完成"],
+            ["08:05","通讯自检通过","","已完成"]];
   var el=evts.map(function(r){
     return '<div class="pd-li"><span class="tm">'+r[0]+'</span><span class="tx">'+r[1]+'</span>'+
       '<span class="st '+r[2]+'">'+r[3]+'</span></div>';
@@ -2315,12 +2319,12 @@ function pageLogi(s,D){
     [D.inToday+" 次","今日入库","good"],[D.outToday+" 次","今日出库"],
     [D.avgMin+" min","平均配送时长"]]);
 
-  var q='<div class="pd-donut-v">'+chartDonut({w:230,h:200,csize:16,ssize:8,
+  var q='<div class="pd-donut-v">'+chartDonut({w:200,h:162,csize:16,ssize:8,
     segments:[{v:D.fit,color:"#00A17B"},{v:100-D.fit,color:"#0C2242"}],
     center:D.fit.toFixed(1)+"%",centerSub:"物料齐套率"})+
     '<div style="font-size:8px;color:#A6C6E8">钢筋网片 98% · 预埋件 94% · 混凝土 99%</div></div>';
 
-  var chart=chartBarsLine({w:920,h:206,labels:D.hrs,max:Math.max(12,Math.max.apply(null,D.hourTask)+2),rmax:12,ticks:4,
+  var chart=chartBarsLine({w:500,h:198,labels:D.hrs,max:Math.max(12,Math.max.apply(null,D.hourTask)+2),rmax:12,ticks:4,
     series:[{data:D.hourTask,color:"#2EA3FF"}],line:{data:D.hourMin,color:"#E5B964"}})+
     legend([["配送任务量(单)","#2EA3FF"],["平均耗时(右轴/min)","#E5B964"]]);
 
@@ -2332,9 +2336,9 @@ function pageLogi(s,D){
     ["AGV-03","立体仓库 → 成品堆场","成品墙板 2 块","待发车","—"],
     ["AGV-06","辅材库 → 打磨工位","240# 砂纸 40 张","已完成","4.9 min"]
   ];
-  var tb=mtable(["AGV","起终点","载运物料","状态","耗时"],det.map(function(r){
+  var tb=mtable(["AGV","载运物料","状态","耗时"],det.map(function(r){
     var cls=r[3]==="已完成"?"good":(r[3]==="在途"?"hl":"warn");
-    return [[r[0]],[r[1]],[r[2]],[r[3],cls],[r[4]]];
+    return [[r[0]],[r[2]],[r[3],cls],[r[4]]];
   }));
 
   var slot=[["A-01 钢筋网片","82%",82,"#2EA3FF"],["A-02 预埋件","64%",64,"#2EA3FF"],
@@ -2344,9 +2348,9 @@ function pageLogi(s,D){
     '<div><span class="k">平均等待</span><b>2.4 min</b></div>'+
     '<div><span class="k">准点率</span><b>97.6%</b></div></div>';
 
-  var ex=[["15:48","AGV-05 路径拥堵 42s，已自动绕行","warn","已绕行"],
-          ["14:20","B-02 库位低于安全库存，触发补料","warn","已补料"],
-          ["10:06","AGV-03 电量 22% 返回充电","","已完成"]];
+  var ex=[["15:48","AGV-05 路径拥堵 42s","warn","已绕行"],
+          ["14:20","B-02 低于安全库存","warn","已补料"],
+          ["10:06","AGV-03 电量 22% 返充","","已完成"]];
   var el=ex.map(function(r){
     return '<div class="pd-li"><span class="tm">'+r[0]+'</span><span class="tx">'+r[1]+'</span>'+
       '<span class="st '+r[2]+'">'+r[3]+'</span></div>';
@@ -2373,13 +2377,13 @@ function pageQual(s,D){
 
   var df=D.defects.filter(function(x){ return x[1]>0; });
   if(!df.length) df=[["无缺陷",0]];
-  var dfc='<div class="pd-donut-v">'+chartDonut({w:230,h:200,csize:15,ssize:8,
+  var dfc='<div class="pd-donut-v">'+chartDonut({w:200,h:162,csize:15,ssize:8,
     segments:df.map(function(x,i){ return {v:Math.max(x[1],0.001),color:["#EB4949","#E5B964","#2EA3FF","#8F7BFF","#00A17B"][i%5]}; }),
     center:D.defect+" 处",centerSub:"当班缺陷"})+
     '<div style="font-size:8px;color:#A6C6E8">缺陷集中于尺寸偏差与表面气泡</div></div>';
 
   var tgt=D.pass7.map(function(){ return 98; });
-  var trend=chartLines({w:920,h:206,labels:D.days,min:94,max:100,dec:1,
+  var trend=chartLines({w:500,h:198,labels:D.days,min:94,max:100,dec:1,
     series:[{data:D.pass7,color:"#00A17B",fill:true},{data:tgt,color:"#93B4D8",dash:true}]})+
     legend([["一次合格率(%)","#00A17B"],["目标 98.0%","#93B4D8"]]);
 
@@ -2390,8 +2394,8 @@ function pageQual(s,D){
     ["QC-20261022-015","混凝土强度","3 组","合格","C30 ✓"],
     ["QC-20261022-014","涂层附着力","5 件","合格","1 级"]
   ];
-  var rt=mtable(["检验单号","项目","批量","结论","合格率"],rec.map(function(r){
-    return [[r[0]],[r[1]],[r[2]],[r[3],r[3]==="合格"?"good":"warn"],[r[4]]];
+  var rt=mtable(["单号","项目","结论","合格率"],rec.map(function(r){
+    return [[r[0].replace("QC-2026","")],[r[1]],[r[3],r[3]==="合格"?"good":"warn"],[r[4]]];
   }));
 
   var dims=[
@@ -2426,7 +2430,7 @@ function pageEnergy(s,D){
     ["¥"+fmt(D.cost),"今日电费"]]);
 
   var tot=D.split.reduce(function(a,b){ return a+b.v; },0);
-  var donut='<div class="pd-donut-v">'+chartDonut({w:230,h:200,csize:15,ssize:8,
+  var donut='<div class="pd-donut-v">'+chartDonut({w:200,h:162,csize:15,ssize:8,
     segments:D.split.map(function(x){ return {v:x.v,color:x.c}; }),
     center:fmt(D.kwh),centerSub:"kWh 今日"})+
     '<div class="pd-kvlist" style="width:100%">'+D.split.map(function(x){
@@ -2434,20 +2438,20 @@ function pageEnergy(s,D){
         ';margin-right:4px;vertical-align:-1px"></i>'+x.nm+'</span><b>'+Math.round(x.v/tot*100)+'%</b></div>';
     }).join("")+'</div></div>';
 
-  var load=chartLines({w:920,h:206,labels:D.hrs,min:20,max:90,
+  var load=chartLines({w:500,h:198,labels:D.hrs,min:20,max:90,
     series:[{data:D.load,color:"#2EA3FF",fill:true},{data:D.temp,color:"#00A17B"}]})+
     legend([["用电负荷(kW)","#2EA3FF"],["环境温度(℃)","#00A17B"]]);
 
-  var bars=chartBars({w:920,h:200,labels:D.hrs,max:Math.max.apply(null,D.kwhH)+30,ticks:4,
+  var bars=chartBars({w:500,h:190,labels:D.hrs,max:Math.max.apply(null,D.kwhH)+30,ticks:4,
     series:[{data:D.kwhH,color:"#2EA3FF"}]});
 
   var bu=Math.min(98,Math.round(D.unit/14*100));
   var bench=[["单位产品能耗",D.unit+" kWh",bu,"#00A17B"],
              ["空调系统","72%",72,"#2EA3FF"],["照明系统","64%",64,"#E5B964"],["空压系统","58%",58,"#E5B964"]];
-  var tips=[["2.4%","蒸养养护升温曲线可缩短 20min，减少空烧","可节省"],
-            ["3.2%","空压系统夜间保压 0.65MPa 偏高，建议降至 0.60MPa","可节省"],
-            ["1.8%","非生产区照明 22:00 后未分区关闭","可节省"],
-            ["1.1%","设备空载待机 >5min 自动降速","可节省"]];
+  var tips=[["2.4%","蒸养升温曲线缩短 20min","可节省"],
+            ["3.2%","空压夜间保压降至 0.60MPa","可节省"],
+            ["1.8%","非生产区照明分区关闭","可节省"],
+            ["1.1%","设备空载 >5min 自动降速","可节省"]];
   var tl=tips.map(function(r){
     return '<div class="pd-li"><span class="tm">'+r[0]+'</span><span class="tx">'+r[1]+'</span>'+
       '<span class="st">'+r[2]+'</span></div>';
