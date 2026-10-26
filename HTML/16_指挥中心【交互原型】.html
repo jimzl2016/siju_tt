@@ -374,6 +374,55 @@ img{user-select:none}
 .pd-img-t::before{content:"❖";color:#2EA3FF;margin-right:5px;font-size:8px}
 .pd-img-wrap img{flex:1;width:100%;min-height:0;object-fit:contain;padding:4px}
 
+/* ============ 弹窗：生产详情（5 个统计 Tab） ============ */
+#pdTabs{flex:none;height:28px;display:flex;align-items:center;gap:6px;padding:0 12px;
+  background:#0E2547;border-bottom:1px solid #1D4E89}
+.pdtab{height:20px;padding:0 14px;background:#10294F;border:1px solid #1F5290;border-radius:3px;
+  color:#A6C6E8;font-size:10px;letter-spacing:.5px;cursor:pointer;white-space:nowrap;transition:.15s}
+.pdtab:hover{color:#EAF3FF;border-color:#2EA3FF}
+.pdtab.on{background:linear-gradient(180deg,#2EA3FF 0%,#1D6FE0 100%);border-color:#2EA3FF;
+  color:#04223A;font-weight:700;box-shadow:0 0 9px rgba(46,163,255,.45)}
+#pdTabs .pd-src{margin-left:auto;font-size:8.5px;color:#6E92BC;font-variant-numeric:tabular-nums}
+#popupBody{flex:1;min-height:0;padding:9px;display:block;overflow:hidden}
+.pd-page{display:none;height:100%;min-height:0}
+.pd-page.on{display:flex;flex-direction:column;gap:7px}
+.pd-row{flex:none;display:flex;gap:6px;min-width:0}
+.pd-row.grow{flex:1;min-height:0}
+.pdc{background:#10254A;border:1px solid #1E4470;border-radius:6px;display:flex;flex-direction:column;
+  min-width:0;min-height:0;overflow:hidden}
+.pdc-h{flex:none;height:21px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+  padding:0 8px;background:linear-gradient(180deg,#1B3D6E 0%,#143A6E 100%);border-bottom:1px solid #1B3E68;
+  font-size:9.5px;font-weight:600;color:#EAF3FF;white-space:nowrap;overflow:hidden}
+.pdc-h .t{display:flex;align-items:center;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.pdc-h .t::before{content:"❖";color:#2EA3FF;margin-right:5px;font-size:8px;flex:none}
+.pdc-h .sub{font-size:8px;font-weight:400;color:#93B4D8;flex:none;font-variant-numeric:tabular-nums}
+.pdc-b{flex:1;padding:6px 8px;min-height:0;display:flex;flex-direction:column;gap:3px;overflow:hidden}
+.pdc-b.scroll{overflow:auto}
+.pdc-b.scroll::-webkit-scrollbar{width:4px}
+.pdc-b.scroll::-webkit-scrollbar-thumb{background:#1D4E89;border-radius:2px}
+.chart-box{flex:1;min-height:0;display:flex;align-items:center}
+.chart-box svg{width:100%;height:100%;display:block}
+.pdc-b svg{display:block}
+.pd-big{display:flex;align-items:baseline;gap:6px;flex:none}
+.pd-big b{font-size:22px;font-weight:700;color:#2EA3FF;line-height:1;font-variant-numeric:tabular-nums;
+  text-shadow:0 0 12px rgba(46,163,255,.4)}
+.pd-big b small{font-size:10px;margin-left:1px}
+.pd-big span{font-size:8.5px;color:#A6C6E8}
+.pd-mini3{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;flex:none}
+.pd-mini3>div{background:#0C2242;border:1px solid #1B3E68;border-radius:4px;padding:3px 6px;
+  display:flex;flex-direction:column;gap:1px}
+.pd-mini3 span.k{font-size:7.5px;color:#A6C6E8}
+.pd-mini3 b{font-size:11px;font-weight:700;color:#EAF3FF;font-variant-numeric:tabular-nums}
+.pd-ds{flex:1;min-height:0;display:flex;gap:8px;align-items:center}
+.pd-ds-l{flex:none;width:46%;height:100%;display:flex;align-items:center;justify-content:center}
+.pd-ds-l svg{width:100%;height:100%;display:block}
+.pd-ds-r{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:3px}
+.pd-kvlist{display:flex;flex-direction:column;gap:4px;font-size:9px}
+.pd-kvlist>div{display:flex;align-items:center;justify-content:space-between;gap:6px;
+  border-bottom:1px dashed #1B3E68;padding-bottom:2px}
+.pd-kvlist span{color:#A6C6E8;white-space:nowrap}
+.pd-kvlist b{color:#EAF3FF;font-weight:700;font-variant-numeric:tabular-nums}
+
 /* ============ 提示 / Toast ============ */
 #tooltip{position:absolute;z-index:100;pointer-events:none;background:rgba(8,14,22,.96);border:1px solid #2A5C9E;
   border-radius:4px;padding:5px 8px;font-size:9px;color:#E2EEFC;display:none;max-width:240px;line-height:1.5;
@@ -618,67 +667,24 @@ img{user-select:none}
     <div id="popup" data-page-node-id="kIZzq6653h4uj33mOdXgGD">
       <div id="popupPanel" data-page-node-id="fAW3pQWbwg5dUEYO8gCBLw">
         <div id="popupHead" data-page-node-id="VVkMt5jn26v4iF4UuWNpkc">
-          <span class="t" data-page-node-id="51AnoucH4i1osHSiA8KlON">生产详情</span>
+          <span class="t" id="pdTitle" data-page-node-id="51AnoucH4i1osHSiA8KlON">墙板拼装工作站 · 生产详情</span>
           <span class="crumb" id="pdCrumb" data-page-node-id="6rCMjl2jy6jHrMkL5ouByT">先进院 · 主车间 · 工位 ADV-01 · 模块 WP20261019007</span>
           <button id="popupClose" data-page-node-id="q2C9LTaQz6OtGeILJWfp2W">关闭</button>
         </div>
+        <div id="pdTabs">
+          <button class="pdtab on" data-tab="task">任务详情</button>
+          <button class="pdtab" data-tab="equip">设备详情</button>
+          <button class="pdtab" data-tab="logi">物流调度</button>
+          <button class="pdtab" data-tab="qual">质量详情</button>
+          <button class="pdtab" data-tab="energy">能耗详情</button>
+          <span class="pd-src" id="pdSrc">数据刷新 --:--:-- · 每 5 秒自动更新</span>
+        </div>
         <div id="popupBody" data-page-node-id="gOukFEpufjTP2CUPvAgNt0">
-          <div id="pdLeft" data-page-node-id="iMwAWZHBDeKL7wQ1eHMj6M">
-            <div class="card" id="pdStationCard" data-page-node-id="9skwpH5CKAQlGNEzzN6Uxa">
-              <div class="card-b" data-page-node-id="Tt4Deh4vXRfyt6GiTojErw">
-                <div id="pdStaIcon" data-page-node-id="iqm1cfPywHPe45u98fOos7"><svg viewBox="0 0 24 24" data-page-node-id="MxHZHKLw8ZWXF5uAHx1xaf"><path d="M20 6h-4V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2zm-10-2h4v2h-4V4z" data-page-node-id="ZXB7EWCfgtzlcpPdk4U7bU"/></svg></div>
-                <div style="min-width:0" data-page-node-id="flOEFJxf7no74mr78XStEs">
-                  <div id="pdStaName" data-page-node-id="c37AlSAFepItFEJYcQT0NU">墙板拼装工作站</div>
-                  <div id="pdStaMeta" data-page-node-id="MdBMqvF1ybYsM5L9C9pHwu">先进院 · 主车间 · 工位 ADV-01 · 模块 WP20261019007</div>
-                </div>
-              </div>
-            </div>
-            <div class="card" id="pdEquipCard" data-page-node-id="FT5UwtIOmajERFDKlhi13e">
-              <div class="card-h" data-page-node-id="lQgUAsKZH6AjxwgXdetDrY"><span class="t" data-page-node-id="qGfuXfDYVSDmD5WWXYKzat">设备状态</span></div>
-              <div class="card-b" data-page-node-id="FqtjZOG4EIhIYdce86CsHR">
-                <div class="eq-grid" data-page-node-id="KgMVzE6NQusdGbL2L0RQzG">
-                  <div class="eq-cell" data-page-node-id="dZUZlbFc7dQ96g4V9h01r1"><span class="k" data-page-node-id="HCaH1jg5muLm3G0QZwEQf8">设备在线率</span><span class="v" id="eqOnline" data-page-node-id="3zSXKKej0YlhqRUWZJzUSY">95%</span></div>
-                  <div class="eq-cell" data-page-node-id="LZXob0DPAm0AVf377Y4IWB"><span class="k" data-page-node-id="Dglvpu2lGF9OypXfgdYpbz">OEE 综合效率</span><span class="v" id="eqOee" data-page-node-id="v7PM1kBNkDOX6q9k8yYDwr">86.4%</span></div>
-                  <div class="eq-cell wide" data-page-node-id="s9ZfLOHwTwqkDZg2ACiBvB">
-                    <div class="eq-status" data-page-node-id="oBbsXMfIqREdbvFJRVKuD6">
-                      <span data-page-node-id="ru7W3Vq3lNDTau8TTyOps9">运行<b id="eqRun" style="color:#00A17B" data-page-node-id="6FeMzT0Ix69BaCSA5kCG5a">6</b></span>
-                      <span data-page-node-id="yKmivPHFA6d6QHICnGV3zL">待机<b id="eqWait" style="color:#E5B964" data-page-node-id="qIZYFABFYEiwa0zkjvVbix">2</b></span>
-                      <span data-page-node-id="ydu5wnEn85PRAdBRJNiWCQ">故障<b id="eqErr" style="color:#EB4949" data-page-node-id="Pa8cyi7qerBaO7pwFuJ3Bp">0</b></span>
-                    </div>
-                    <span style="font-size:8px;color:#A6C6E8" data-page-node-id="j73dGJE6V4cPnxJnBWSEe3">运行 / 待机 / 故障</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="card" id="pdChartCard" data-page-node-id="Gquh1XhmfGLRtsdlZZr7bA">
-              <div class="card-h" data-page-node-id="4TyQdn7tRBcyaIl8x1JiNR"><span class="t" data-page-node-id="6EnK9VBQoyW3y8Eizfs5uJ">近 7 日产量</span><span style="font-size:8.5px;color:#A6C6E8" data-page-node-id="XrDDtngRZ4pea4sguq2cgs">虚线为日计划</span></div>
-              <img src="images/13_4指挥中心【有交互】/u29.png" alt="近7日产量占位图" data-page-node-id="Ufsp7mVcZ3PKAbth0s4vxx"/>
-            </div>
-          </div>
-          <div id="pdRight" data-page-node-id="eh7CSJj2ib6HYynm7nlqod">
-            <div id="pdTaskRow" data-page-node-id="OsMWn72goOoceOMxhhSz89">
-              <div class="tchip" data-page-node-id="LPnenq0UOGi7poIiLxGofE"><div class="k" data-page-node-id="zxsSm69HoeC0n4lgQh3xRM">在制模块</div><div class="v" id="tcModule" data-page-node-id="RRmUlHZvwH72tTUGc8AFFR">MP20261019001</div></div>
-              <div class="tchip" data-page-node-id="uK0hw2Cs7YrdrdkOGhyjC4"><div class="k" data-page-node-id="RYKi2afpuoEa9b1boWlZMx">责任班组</div><div class="v" id="tcTeam" data-page-node-id="5RBJwYsyhNfAVmR1jSmUmC">甲班 · 王强</div></div>
-              <div class="tchip" data-page-node-id="Jw4ER2rV05eDX7Nne3QBHD"><div class="k" data-page-node-id="80VCRWvyu4nAgnAlupOl8b">班次</div><div class="v" id="tcShift" data-page-node-id="7llBpkyMcM2uCUDexAttjB">08:00 ~ 20:00</div></div>
-              <div class="tchip" data-page-node-id="M6O639kgZcCvpzSjwbguPE"><div class="k" data-page-node-id="iVbWSe7TqU7GfkajACxEhW">工序开始</div><div class="v" id="tcStart" data-page-node-id="QRcm1mHfv4KooLoesqqDaz">08:00</div></div>
-              <div class="tchip" data-page-node-id="Vs00ZEXGkc0z6h4HD4REYP"><div class="k" data-page-node-id="AZtNS3vV6jOXJQGvMEbLEt">预计完成</div><div class="v" id="tcEta" data-page-node-id="Hhn66T0EigaJ0cLBKkqpDC">08:14</div></div>
-            </div>
-            <div id="pdSteps" data-page-node-id="UiM0z3HI0mqrRARuKmusmG"></div>
-            <div id="pdImgRow" data-page-node-id="GPhTR2TnlYYvwWet6E62Vq">
-              <div class="pd-img-wrap" data-page-node-id="OGgNjcE9KS1StWPP513JZ0">
-                <div class="pd-img-t" data-page-node-id="1iWIdedUMOWOItT67fm0K6">工艺流程</div>
-                <img src="images/13_4指挥中心【有交互】/u30.png" alt="工艺流程占位图" data-page-node-id="bi2cT97bP0YQg4DoEsf4tA"/>
-              </div>
-              <div class="pd-img-wrap" data-page-node-id="1psj5sMmkIgCfrfMQXuNer">
-                <div class="pd-img-t" data-page-node-id="eYQ4jgosfqO3fZFhX8vbl0">关键工艺参数（实测 vs 标准）</div>
-                <img src="images/13_4指挥中心【有交互】/u31.png" alt="关键工艺参数占位图" data-page-node-id="ZVGTfI6BMTD1SNRNpsHZQX"/>
-              </div>
-              <div class="pd-img-wrap narrow" data-page-node-id="sh9WeixXEB1a7Rdu6uDHWE">
-                <div class="pd-img-t" data-page-node-id="B2sUNOJKsHDbDH9wWeQ2V2">当班产量</div>
-                <img src="images/13_4指挥中心【有交互】/u44.png" alt="当班产量占位图" data-page-node-id="Gvj2Lhw3mni1MsAtkFdeE6"/>
-              </div>
-            </div>
-          </div>
+          <div class="pd-page on" id="pdPageTask"></div>
+          <div class="pd-page" id="pdPageEquip"></div>
+          <div class="pd-page" id="pdPageLogi"></div>
+          <div class="pd-page" id="pdPageQual"></div>
+          <div class="pd-page" id="pdPageEnergy"></div>
         </div>
       </div>
     </div>
@@ -2058,31 +2064,380 @@ function findStation(id){
   }
   return st;
 }
+var PD_TABS=["task","equip","logi","qual","energy"];
+var pdTab="task", pdTimer=null;
+
+function pdHash(str){
+  var h=2166136261;
+  for(var i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); }
+  return h>>>0;
+}
+function pdRand(seed){
+  var v=(seed>>>0)||1;
+  return function(a,b){ v=(Math.imul(v,1103515245)+12345)>>>0; return a+(v>>>8)%(b-a+1); };
+}
+function pdClock(){
+  var d=new Date(), p=function(n){ return (n<10?"0":"")+n; };
+  return p(d.getHours())+":"+p(d.getMinutes())+":"+p(d.getSeconds());
+}
+function pdCard(title,sub,body,flex,scroll){
+  return '<div class="pdc" style="flex:'+(flex||1)+'">'+
+    '<div class="pdc-h"><span class="t">'+title+'</span><span class="sub">'+(sub||"")+'</span></div>'+
+    '<div class="pdc-b'+(scroll?" scroll":"")+'">'+body+'</div></div>';
+}
+function pdChip(k,v){ return '<div class="tchip"><div class="k">'+k+'</div><div class="v">'+v+'</div></div>'; }
+function pdTilesRow(items){
+  var s='<div class="tiles" style="grid-template-columns:repeat('+items.length+',1fr)">';
+  items.forEach(function(it){
+    s+='<div class="kpi '+(it[2]||"")+'"><span class="v">'+it[0]+'</span><span class="k">'+it[1]+'</span></div>';
+  });
+  return '<div class="pd-row" style="height:47px">'+s+'</div></div>';
+}
+function pdSide(svg,side){
+  return '<div class="pd-ds"><div class="pd-ds-l">'+svg+'</div><div class="pd-ds-r">'+side+'</div></div>';
+}
+
+/* ---------- 按工位生成统计数据 ---------- */
+function pdData(s){
+  var dev=WS_DEV[s.id]||{m:"通用工装设备",c:s.code+"-001",p:"主车间",cap:60,f:3,t:"MIC-01A",dur:40,mat:"标准料件"};
+  var r=pdRand(pdHash(s.id+s.task.module));
+  var out=s.output, plan=s.plan;
+  var eqTot=Math.max(4,s.run+s.wait+s.err);
+  var pass=+(96.4+r(0,28)/10).toFixed(1);
+  var kwh=Math.round(out*(dev.f||3)*3.1+r(0,70));
+  var D={
+    dev:dev, eqTot:eqTot,
+    pass:pass, rework:+(0.2+r(0,12)/10).toFixed(1), scrap:+(0.1+r(0,7)/10).toFixed(1),
+    defect:r(1,5), insp:r(18,32), complaint:r(0,1),
+    agvTot:8, agvOn:6+r(0,2), wip:9+r(0,15), waitShip:3+r(0,6),
+    inToday:36+r(0,20), outToday:30+r(0,18), avgMin:(6.2+r(0,44)/10).toFixed(1),
+    kwh:kwh, unit:+(kwh/Math.max(1,out)).toFixed(1), water:(12+r(0,80)/10).toFixed(1),
+    gas:180+r(0,120), peak:36+r(0,26), cost:Math.round(kwh*0.88),
+    days:["10/16","10/17","10/18","10/19","10/20","10/21","10/22"],
+    hrs:["08","09","10","11","12","13","14","15","16","17","18","19"]
+  };
+  var i;
+  D.out7=[]; D.plan7=[]; D.ratio7=[]; D.pass7=[]; D.rework7=[];
+  D.hourTask=[]; D.hourMin=[]; D.load=[]; D.temp=[]; D.kwhH=[];
+  for(i=0;i<7;i++){
+    var pv=Math.round(plan*(0.84+r(0,22)/100));
+    D.plan7.push(plan);
+    D.out7.push(i===6?out:pv);
+    D.ratio7.push(Math.round((i===6?out:pv)/plan*1000)/10);
+    var q=Math.min(99.6,+(pass-1.1+r(0,20)/10).toFixed(1));
+    D.pass7.push(q);
+    D.rework7.push(+((100-q)/2.2).toFixed(1));
+  }
+  for(i=0;i<12;i++){
+    D.hourTask.push(2+r(0,8));
+    D.hourMin.push(+(4+r(0,52)/10).toFixed(1));
+    D.load.push(36+r(0,42));
+    D.temp.push(27+r(0,15));
+    D.kwhH.push(Math.round(kwh/12*(0.68+r(0,64)/100)));
+  }
+  D.defects=[["尺寸偏差",r(0,3),2],["表面气泡",r(0,2),1],["边角破损",r(0,2),1],["涂层不均",r(0,2),0],["预埋偏位",r(0,1),0]];
+  D.split=[
+    {nm:"设备动力",v:58+r(0,8),c:"#2EA3FF"},
+    {nm:"蒸养养护",v:16+r(0,6),c:"#00A17B"},
+    {nm:"照明办公",v:8+r(0,5),c:"#E5B964"},
+    {nm:"空压系统",v:9+r(0,5),c:"#8F7BFF"}
+  ];
+  D.fit=+(96.5+r(0,30)/10).toFixed(1);
+  return D;
+}
+
+/* ---------- Tab 1：任务详情 ---------- */
+function pageTask(s,D){
+  var h='<div class="pd-row">';
+  h+=pdChip("在制模块",s.task.module);
+  h+=pdChip("责任班组",s.task.team);
+  h+=pdChip("班次",s.task.shift);
+  h+=pdChip("工序开始",s.task.start);
+  h+=pdChip("预计完成",s.task.eta);
+  h+=pdChip("当前工序",STEPS[Math.min(STEPS.length,s.step)-1]||STEPS[0]);
+  h+='</div>';
+
+  var st="";
+  STEPS.forEach(function(x,i){
+    var cls=i<s.step-1?"done":(i===s.step-1?"cur":"");
+    st+='<div class="pd-step '+cls+'"><i></i>'+x+'</div>';
+    if(i<STEPS.length-1) st+='<span style="color:#44689A;font-size:8px">➜</span>';
+  });
+  h+='<div id="pdSteps">'+st+'</div>';
+
+  var bars=[];
+  STEPS.forEach(function(x,i){
+    var p=i<s.step-1?100:(i===s.step-1?s.progress:0);
+    bars.push([x,p+"%",p,p>=100?"#00A17B":(p>0?"#2EA3FF":"#3A5E8C")]);
+  });
+  var b1='<div class="pd-big"><b>'+s.progress+'<small>%</small></b><span>当前工序完成度</span></div>'+hbars(bars)+
+         '<div class="mini" style="margin-top:auto"><span>计划产量 <b>'+s.plan+'</b> 块</span><span>已完成 <b>'+s.output+'</b> 块</span><span>节拍 <b>'+s.takt+'</b></span></div>';
+
+  var chart=chartBarsLine({w:890,h:206,labels:D.days,rmax:110,ticks:4,
+    max:Math.round(s.plan*1.35),
+    series:[{data:D.out7,color:"#2EA3FF"},{data:D.plan7,color:"#1B4C7E"}],
+    line:{data:D.ratio7,color:"#00A17B"}})+
+    legend([["实际产量","#2EA3FF"],["计划产量","#1B4C7E"],["达成率(%)","#00A17B"]]);
+
+  var rows=[
+    [["计划产量"],[s.plan+" 块"]],
+    [["已完成产量"],[s.output+" 块","hl"]],
+    [["在制模块"],[s.task.module]],
+    [["当前节拍"],[s.takt]],
+    [["计划达成率"],[Math.round(s.output/s.plan*100)+"%",s.output>=s.plan?"good":"warn"]],
+    [["预计完成"],[s.task.eta]]
+  ];
+  var b3=mtable(["指标","数值"],rows);
+
+  h+='<div class="pd-row grow">'+
+     pdCard("任务执行进度",'模块 '+s.task.module,b1,1)+
+     pdCard("近 7 日产量 · 计划达成",'单位：块',chart,2.1)+
+     pdCard("当班产出与节拍",'班次 '+s.task.shift,b3,1)+
+     '</div>';
+
+  h+='<div class="pd-row" style="height:152px">'+
+     '<div class="pd-img-wrap"><div class="pd-img-t">工艺流程</div><img src="'+IMG+'u30.png" alt="工艺流程"/></div>'+
+     '<div class="pd-img-wrap"><div class="pd-img-t">关键工艺参数（实测 vs 标准）</div><img src="'+IMG+'u31.png" alt="关键工艺参数"/></div>'+
+     '<div class="pd-img-wrap narrow"><div class="pd-img-t">当班产量</div><img src="'+IMG+'u44.png" alt="当班产量"/></div>'+
+     '</div>';
+  return h;
+}
+
+/* ---------- Tab 2：设备详情 ---------- */
+function pageEquip(s,D){
+  var h=pdTilesRow([
+    [D.eqTot+" 台","设备总数"],
+    [s.online+"%","设备在线率","good"],
+    [s.oee+"%","OEE 综合效率","hl"],
+    [s.run+" 台","运行中","good"],
+    [s.wait+" 台","待机","warn"],
+    [s.err+" 台","故障",s.err?"bad":"good"]
+  ]);
+
+  var donut=pdSide(chartDonut({w:170,h:150,csize:15,ssize:8,
+    segments:[{v:s.run,color:"#00A17B"},{v:s.wait,color:"#E5B964"},{v:Math.max(s.err,0.001),color:"#EB4949"}],
+    center:s.online+"%",centerSub:"在线率"}),
+    '<div class="pd-kvlist">'+
+      '<div><span>运行中</span><b style="color:#00A17B">'+s.run+' 台</b></div>'+
+      '<div><span>待机</span><b style="color:#E5B964">'+s.wait+' 台</b></div>'+
+      '<div><span>故障</span><b style="color:#EB4949">'+s.err+' 台</b></div>'+
+      '<div><span>综合效率</span><b>'+s.oee+'%</b></div>'+
+    '</div>');
+
+  var trend=chartLines({w:920,h:168,labels:D.hrs,min:20,max:80,
+    series:[{data:D.load,color:"#2EA3FF",fill:true},{data:D.temp,color:"#E5B964"}]})+
+    legend([["负载率(%)","#2EA3FF"],["主轴温度(℃)","#E5B964"]]);
+
+  var health=[
+    [D.dev.m,D.dev.c,D.dev.p,"运行",s.run*1.8,Math.min(99,s.oee+3)],
+    ["视觉定位相机","VS-220-011","工位上游","运行",11.2,s.oee-2],
+    ["输送辊道","CV-160-008","工位下游","运行",12.0,s.oee-5],
+    ["气动夹具单元","PN-90-014","工位本体","待机",6.4,s.oee-11],
+    ["安全光栅","SG-40-003","工位周界","运行",12.0,99]
+  ];
+  var tb=mtable(["设备名称","型号","位置","状态","今日运行(h)","OEE"],health.map(function(r){
+    return [[r[0]],[r[1]],[r[2]],[r[3],r[3]==="运行"?"good":"warn"],[r[4].toFixed(1)+" h"],[r[5]+"%"]];
+  }));
+
+  var hb=[["主轴系统",96,"96%","#00A17B"],["伺服驱动",93,"93%","#2EA3FF"],
+          ["气动单元",88,"88%","#2EA3FF"],["视觉系统",91,"91%","#00A17B"],["润滑状态",84,"84%","#E5B964"]];
+  h+='<div class="pd-row grow">'+
+     pdCard("设备状态分布",'共 '+D.eqTot+' 台',donut,1)+
+     pdCard("近 12 小时负载 / 温度",'班次 '+s.task.shift,trend,2.2)+
+     pdCard("设备健康度评分",'满分 100',hbars(hb),1)+
+     '</div>';
+  h+='<div class="pd-row grow">'+pdCard("设备清单与运行参数",'数据来源：设备物联平台',tb,1,true)+'</div>';
+  return h;
+}
+
+/* ---------- Tab 3：物流调度 ---------- */
+function pageLogi(s,D){
+  var h=pdTilesRow([
+    [D.agvOn+"/"+D.agvTot,"AGV 在线"],
+    [D.wip+" 块","在制模块","hl"],
+    [D.waitShip+" 单","待配送任务","warn"],
+    [D.inToday+" 次","今日入库","good"],
+    [D.outToday+" 次","今日出库"],
+    [D.avgMin+" min","平均配送时长"]
+  ]);
+
+  var chart=chartBarsLine({w:1290,h:168,labels:D.hrs,max:Math.max(12,Math.max.apply(null,D.hourTask)+2),rmax:12,ticks:4,
+    series:[{data:D.hourTask,color:"#2EA3FF"}],
+    line:{data:D.hourMin,color:"#E5B964"}})+
+    legend([["配送任务量(单)","#2EA3FF"],["平均耗时(右轴/min)","#E5B964"]]);
+
+  var ring1=pdSide(chartDonut({w:170,h:145,csize:15,ssize:8,
+    segments:[{v:D.fit,color:"#00A17B"},{v:100-D.fit,color:"#0C2242"}],
+    center:D.fit.toFixed(1)+"%",centerSub:"物料齐套率"}),
+    hbars([["钢筋网片",98,"98%","#00A17B"],["预埋件",94,"94%","#2EA3FF"],["混凝土",99,"99%","#00A17B"],["辅材包",92,"92%","#E5B964"]]));
+
+  var det=[
+    ["AGV-02","A 区 · 钢筋线","钢筋网片 6mm","已完成","08:12","6.5 min"],
+    ["AGV-05","A 区 · 底板工位","C30 混凝土 3.2m³","在途","--","--"],
+    ["AGV-01","B 区 · 地砖工位","600×600 地砖 24 箱","已完成","08:46","7.2 min"],
+    ["AGV-07","B 区 · 腻子工位","界面剂 20L","已完成","09:05","5.8 min"],
+    ["AGV-03","立体仓库","成品墙板 2 块","待发车","--","--"]
+  ];
+  var tb=mtable(["AGV","起点 / 终点","载运物料","状态","完成时间","耗时"],det.map(function(r){
+    var cls=r[3]==="已完成"?"good":(r[3]==="在途"?"hl":"warn");
+    return [[r[0]],[r[1]],[r[2]],[r[3],cls],[r[4]],[r[5]]];
+  }));
+
+  var slot=[["A-01 钢筋网片",82,"82%","#2EA3FF"],["A-02 预埋件",64,"64%","#2EA3FF"],
+            ["B-01 地砖",71,"71%","#00A17B"],["B-02 辅材",46,"46%","#E5B964"],["C-01 成品缓存",58,"58%","#8F7BFF"]];
+  var sid='<div class="pd-mini3">'+
+    '<div><span class="k">在途 AGV</span><b>'+D.agvOn+' 台</b></div>'+
+    '<div><span class="k">平均等待</span><b>2.4 min</b></div>'+
+    '<div><span class="k">准点率</span><b>97.6%</b></div></div>'+hbars(slot);
+
+  h+='<div class="pd-row grow">'+
+     pdCard("AGV 配送任务量 · 平均耗时",'今日 '+D.hrs[0]+":00 ~ "+D.hrs[11]+":00",chart,2.2)+
+     pdCard("物料齐套率",'按物料品类',ring1,1)+
+     '</div>';
+  h+='<div class="pd-row grow">'+
+     pdCard("配送任务明细",'实时调度流水',tb,2.2,true)+
+     pdCard("库位占用与在制品",'仓储区',sid,1)+
+     '</div>';
+  return h;
+}
+
+/* ---------- Tab 4：质量详情 ---------- */
+function pageQual(s,D){
+  var h=pdTilesRow([
+    [D.pass+"%","一次合格率","good"],
+    [D.rework+"%","返修率","warn"],
+    [D.scrap+"%","报废率"],
+    [D.defect+" 处","当班缺陷数",D.defect>3?"warn":"good"],
+    [D.insp+" 批","检验批次"],
+    [D.complaint+" 起","客户投诉","good"]
+  ]);
+
+  var trend=chartLines({w:1290,h:168,labels:D.days,min:94,max:100,dec:0,
+    series:[{data:D.pass7,color:"#00A17B",fill:true},{data:D.rework7,color:"#E5B964"}]})+
+    legend([["一次合格率(%)","#00A17B"],["返修率(%)","#E5B964"]]);
+
+  var df=D.defects.filter(function(x){ return x[1]>0; });
+  if(!df.length) df=[["无缺陷",0,0]];
+  var dmax=Math.max.apply(null,df.map(function(x){ return x[1]; }))||1;
+  var dfb=df.map(function(x){ return [x[0],x[1]+" 处",Math.round(x[1]/dmax*100),x[1]>=2?"#EB4949":"#E5B964"]; });
+  var dfc=pdSide(chartDonut({w:150,h:130,csize:14,ssize:8,
+    segments:df.map(function(x,i){ return {v:Math.max(x[1],0.001),color:["#EB4949","#E5B964","#2EA3FF","#8F7BFF","#00A17B"][i%5]}; }),
+    center:D.defect+" 处",centerSub:"当班缺陷"}),hbars(dfb));
+
+  var dims=[
+    [["长度偏差"],["±2.0 mm"],["+0.8 mm"],["合格","good"]],
+    [["宽度偏差"],["±2.0 mm"],["-0.5 mm"],["合格","good"]],
+    [["厚度偏差"],["±1.5 mm"],["+1.2 mm"],["临界","warn"]],
+    [["表面平整度"],["≤2.5 mm"],["1.6 mm"],["合格","good"]],
+    [["对角线差"],["≤3.0 mm"],["2.1 mm"],["合格","good"]]
+  ];
+  var dt=mtable(["检测项","标准","实测","结论"],dims);
+
+  var rec=[
+    ["QC-20261022-018","尺寸全检",D.insp+" 件","合格",D.pass+"%"],
+    ["QC-20261022-017","外观检验",D.insp+" 件","合格","99.2%"],
+    ["QC-20261022-016","预埋件位置",D.insp+" 件",D.defect>2?"返修":"合格","97.4%"],
+    ["QC-20261022-015","混凝土强度","3 组","合格","C30 ✓"],
+    ["QC-20261022-014","涂层附着力","5 件","合格","1 级"]
+  ];
+  var rt=mtable(["检验单号","检验项目","批量","结论","合格率"],rec.map(function(r){
+    return [[r[0]],[r[1]],[r[2]],[r[3],r[3]==="合格"?"good":"warn"],[r[4]]];
+  }));
+
+  h+='<div class="pd-row grow">'+
+     pdCard("近 7 日一次合格率 / 返修率",'目标 ≥ 98.0%',trend,2.2)+
+     pdCard("缺陷类型分布",'当班累计',dfc,1)+
+     '</div>';
+  h+='<div class="pd-row grow">'+
+     pdCard("质量检验记录",'质检系统同步',rt,2.2,true)+
+     pdCard("关键尺寸实测 vs 标准",'单位：mm',dt,1)+
+     '</div>';
+  return h;
+}
+
+/* ---------- Tab 5：能耗详情 ---------- */
+function pageEnergy(s,D){
+  var h=pdTilesRow([
+    [fmt(D.kwh)+" kWh","今日用电","hl"],
+    [D.unit+" kWh","单块能耗"],
+    [D.water+" t","今日用水"],
+    [D.gas+" m³","今日用气"],
+    [D.peak+" kW","峰值负荷","warn"],
+    ["¥"+fmt(D.cost),"今日电费"]
+  ]);
+
+  var load=chartLines({w:1290,h:168,labels:D.hrs,min:20,max:90,
+    series:[{data:D.load,color:"#2EA3FF",fill:true},{data:D.temp,color:"#00A17B"}]})+
+    legend([["用电负荷(kW)","#2EA3FF"],["环境温度(℃)","#00A17B"]]);
+
+  var tot=D.split.reduce(function(a,b){ return a+b.v; },0);
+  var donut=pdSide(chartDonut({w:170,h:145,csize:14,ssize:8,
+    segments:D.split.map(function(x){ return {v:x.v,color:x.c}; }),
+    center:Math.round(tot)+"%",centerSub:"能耗构成"}),
+    '<div class="pd-kvlist">'+D.split.map(function(x){
+      return '<div><span><i style="display:inline-block;width:7px;height:7px;border-radius:2px;background:'+x.c+
+        ';margin-right:4px;vertical-align:-1px"></i>'+x.nm+'</span><b>'+Math.round(x.v/tot*100)+'%</b></div>';
+    }).join("")+'</div>');
+
+  var bars=chartBars({w:1290,h:168,labels:D.hrs,max:Math.max.apply(null,D.kwhH)+30,ticks:4,
+    series:[{data:D.kwhH,color:"#2EA3FF"}]});
+
+  var bench=[["单位产品能耗",D.unit+" kWh",Math.min(98,Math.round(D.unit/14*100)),"#00A17B"],
+             ["空调系统",72,"72%","#2EA3FF"],
+             ["照明系统",64,"64%","#E5B964"],
+             ["空压系统",58,"58%","#E5B964"]];
+  var bcard=hbars(bench)+
+    '<div class="mini" style="margin-top:auto"><span>能耗定额 <b>14.0 kWh/块</b></span><span>节能率 <b style="color:#00A17B">'+(100-Math.round(D.unit/14*100))+'%</b></span></div>';
+
+  h+='<div class="pd-row grow">'+
+     pdCard("近 12 小时用电负荷",'今日累计 '+fmt(D.kwh)+' kWh',load,2.2)+
+     pdCard("分项能耗占比",'按系统拆分',donut,1)+
+     '</div>';
+  h+='<div class="pd-row grow">'+
+     pdCard("分时电耗",'单位：kWh',bars,2.2)+
+     pdCard("能耗对标与节能",'对照定额 14.0 kWh/块',bcard,1)+
+     '</div>';
+  return h;
+}
+
+/* ---------- 渲染与切换 ---------- */
+function renderPopup(s,keepTab){
+  var D=pdData(s);
+  $("pdPageTask").innerHTML=pageTask(s,D);
+  $("pdPageEquip").innerHTML=pageEquip(s,D);
+  $("pdPageLogi").innerHTML=pageLogi(s,D);
+  $("pdPageQual").innerHTML=pageQual(s,D);
+  $("pdPageEnergy").innerHTML=pageEnergy(s,D);
+  if(!keepTab) pdTab="task";
+  switchPdTab(pdTab);
+  $("pdSrc").textContent="数据刷新 "+pdClock()+" · 每 5 秒自动更新";
+}
+function switchPdTab(k){
+  pdTab=k;
+  var bs=document.querySelectorAll(".pdtab");
+  for(var i=0;i<bs.length;i++) bs[i].classList.toggle("on", bs[i].getAttribute("data-tab")===k);
+  PD_TABS.forEach(function(t){
+    var pg=$("pdPage"+t.charAt(0).toUpperCase()+t.slice(1));
+    if(pg) pg.classList.toggle("on", t===k);
+  });
+}
 function openStation(id){
   var s=findStation(id); if(!s) return;
   state.station=id;
-  $("pdStaName").textContent=s.name+"工作站";
-  $("pdStaMeta").textContent="先进院 · 主车间 · 工位 "+s.code+" · 模块 "+s.task.module;
+  $("pdTitle").textContent=s.name+"工作站 · 生产详情";
   $("pdCrumb").textContent="先进院 · 主车间 · 工位 "+s.code+" · 模块 "+s.task.module+" · "+FLOORS[state.floor].name;
-  $("eqOnline").textContent=s.online+"%";
-  $("eqOee").textContent=s.oee+"%";
-  $("eqRun").textContent=s.run; $("eqWait").textContent=s.wait; $("eqErr").textContent=s.err;
-  $("tcModule").textContent=s.task.module;
-  $("tcTeam").textContent=s.task.team;
-  $("tcShift").textContent=s.task.shift;
-  $("tcStart").textContent=s.task.start;
-  $("tcEta").textContent=s.task.eta;
-  var steps="";
-  STEPS.forEach(function(st,i){
-    var cls=i<s.step-1?"done":i===s.step-1?"cur":"";
-    steps+='<div class="pd-step '+cls+'"><i></i>'+st+'</div>';
-    if(i<STEPS.length-1) steps+='<span style="color:#44689A;font-size:8px">➜</span>';
-  });
-  $("pdSteps").innerHTML=steps;
+  renderPopup(s,false);
   $("popup").classList.add("show");
   renderMarkers();
+  if(pdTimer) clearInterval(pdTimer);
+  pdTimer=setInterval(function(){
+    var e=$("pdSrc"); if(e) e.textContent="数据刷新 "+pdClock()+" · 每 5 秒自动更新";
+  },5000);
 }
-function closePopup(){ $("popup").classList.remove("show"); }
+function closePopup(){
+  $("popup").classList.remove("show");
+  if(pdTimer){ clearInterval(pdTimer); pdTimer=null; }
+}
 
 /* ============================================================
    整场监控弹窗（模拟数据）
@@ -2417,6 +2772,7 @@ function toast(msg){
    ============================================================ */
 function bind(){
   $("popupClose").onclick=closePopup;
+  document.querySelectorAll(".pdtab").forEach(function(b){ b.onclick=function(){ switchPdTab(b.getAttribute("data-tab")); }; });
   $("monClose").onclick=closeMonitor;
   $("monCamBarAll").onclick=function(){
     monFilter="all"; monSelKey="all"; monFocusCam=null;
