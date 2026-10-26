@@ -389,33 +389,15 @@ img{user-select:none}
 ::-webkit-scrollbar-thumb{background:#1F5290;border-radius:3px}
 
 /* ============================================================
-   工作站页（首页）：工位切换条 + 工位视频 + 设备卡
+   工作站页（首页）：工序模拟视频 + 当前任务 + 右侧指标
    ============================================================ */
-.ws-chips{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;flex:none;margin-bottom:5px}
-.ws-chip{height:21px;border-radius:3px;background:#0C2242;border:1px solid #1B3E68;color:#A6C6E8;
-  font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:3px;padding:0;
-  font-variant-numeric:tabular-nums;transition:background .15s,border-color .15s,color .15s}
-.ws-chip i{width:4px;height:4px;border-radius:50%;flex:none;background:#00A17B}
-.ws-chip.wait i{background:#F2C94C}
-.ws-chip.err i{background:#EB4949}
-.ws-chip.off i{background:#5F7A99}
-.ws-chip:hover{border-color:#2EA3FF;color:#EAF3FF}
-.ws-chip.on{background:linear-gradient(180deg,#2E9BF6,#0A5A9E);border-color:#BBDFFF;color:#fff;
-  box-shadow:0 0 8px rgba(46,163,255,.5)}
-.ws-chip.on i{background:#fff;box-shadow:0 0 6px #fff}
-.ws-live{display:inline-flex;align-items:center;gap:3px;color:#4FE3C8;font-weight:700}
-.ws-live i{width:4px;height:4px;border-radius:50%;background:#4FE3C8;box-shadow:0 0 5px #4FE3C8;
-  animation:blink 1.4s infinite}
-
+/* 摄像机画面底图 */
 .vgrid{position:absolute;inset:0;pointer-events:none;
   background-image:linear-gradient(rgba(46,163,255,.10) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(46,163,255,.10) 1px,transparent 1px);
   background-size:24px 24px;
   -webkit-mask-image:radial-gradient(120% 90% at 50% 40%,#000 32%,transparent 88%);
   mask-image:radial-gradient(120% 90% at 50% 40%,#000 32%,transparent 88%)}
-
-.ws-vid{flex:1;min-height:0;position:relative;border-radius:4px;overflow:hidden;border:1px solid #1B3E68;
-  background:radial-gradient(120% 100% at 50% 0%,#17407A 0%,#0A1730 66%,#071022 100%)}
 .vfeed{position:absolute;inset:0;background-repeat:no-repeat;background-size:200% auto;
   filter:brightness(.82) saturate(.85) contrast(1.05);opacity:.78;
   -webkit-mask-image:radial-gradient(120% 100% at 50% 50%,#000 40%,rgba(0,0,0,.45) 100%);
@@ -423,8 +405,11 @@ img{user-select:none}
 .vtint{position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(180deg,rgba(10,44,92,.5),rgba(4,14,34,.66));
   box-shadow:inset 0 0 44px 14px rgba(3,10,26,.55)}
-.dv-thumb .vfeed{background-size:330% auto;opacity:.72;filter:brightness(.72) saturate(.75)}
-.dv-thumb .vtint{box-shadow:inset 0 0 18px 6px rgba(3,10,26,.5)}
+
+/* ---------- 卡1：工序模拟视频 ---------- */
+.ws-sim{flex:1;display:flex;flex-direction:column;min-height:0}
+.ws-vid{position:relative;flex:1;min-height:0;border-radius:4px;overflow:hidden;border:1px solid #1B3E68;
+  background:radial-gradient(120% 100% at 50% 0%,#17407A 0%,#0A1730 66%,#071022 100%)}
 .ws-vid .vret{position:absolute;left:20%;top:50%;width:62px;height:62px;transform:translate(-50%,-50%)}
 .ws-vid .vret .r1,.ws-vid .vret .r2{position:absolute;inset:0;border-radius:50%}
 .ws-vid .vret .r1{border:1px solid rgba(46,163,255,.38)}
@@ -445,64 +430,102 @@ img{user-select:none}
 .ws-vid .vrec i{width:4px;height:4px;border-radius:50%;background:#EB4949;animation:blink 1.2s infinite}
 .ws-vid .vres{position:absolute;right:6px;top:5px;font-size:7.5px;color:#9EC0E4;
   background:rgba(4,16,36,.62);border-radius:2px;padding:1px 4px}
-.ws-vid .vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:36px;height:36px;
-  border-radius:50%;background:rgba(46,163,255,.18);border:1px solid #2EA3FF;color:#DCEBFF;font-size:10px;
-  display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 0 16px rgba(46,163,255,.38);
+.ws-vid .vplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:38px;height:38px;
+  border-radius:50%;background:rgba(46,163,255,.20);border:1px solid #2EA3FF;color:#DCEBFF;font-size:11px;
+  display:flex;align-items:center;justify-content:center;z-index:2;box-shadow:0 0 18px rgba(46,163,255,.4);
   transition:background .15s,transform .15s}
-.ws-vid .vplay:hover{background:rgba(46,163,255,.36);transform:translate(-50%,-50%) scale(1.08)}
-.ws-vid .vfoot{position:absolute;left:0;right:0;bottom:0;padding:16px 7px 5px;display:flex;align-items:baseline;
-  gap:6px;background:linear-gradient(180deg,transparent,rgba(3,12,30,.92))}
-.ws-vid .vfoot b{font-size:10px;color:#EAF3FF;font-weight:700;white-space:nowrap}
-.ws-vid .vfoot span{font-size:8px;color:#9EC0E4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ws-vid .vc{position:absolute;width:9px;height:9px;border:1px solid rgba(46,163,255,.85)}
-.ws-vid .vc.tl{left:4px;top:4px;border-right:0;border-bottom:0}
-.ws-vid .vc.tr{right:4px;top:4px;border-left:0;border-bottom:0}
-.ws-vid .vc.bl{left:4px;bottom:4px;border-right:0;border-top:0}
-.ws-vid .vc.br{right:4px;bottom:4px;border-left:0;border-top:0}
+.ws-vid .vplay:hover{background:rgba(46,163,255,.38);transform:translate(-50%,-50%) scale(1.08)}
 
-.dv-top{flex:none;display:flex;gap:7px;min-height:0}
-.dv-thumb{width:104px;height:62px;flex:none;border-radius:4px;position:relative;overflow:hidden;
-  border:1px solid #1B3E68;background:radial-gradient(120% 100% at 50% 0%,#17407A,#0A1730)}
-.dv-thumb .rec{position:absolute;left:4px;top:3px;display:flex;align-items:center;gap:3px;font-size:7px;color:#FFB4B4}
-.dv-thumb .rec i{width:3px;height:3px;border-radius:50%;background:#EB4949;animation:blink 1.2s infinite}
-.dv-thumb .cd{position:absolute;left:4px;bottom:3px;font-size:7px;color:#9EC0E4;background:rgba(4,16,36,.6);
-  border-radius:2px;padding:0 3px}
-.dv-id{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:3px}
-.dv-id .nm{font-size:10.5px;font-weight:700;color:#EAF3FF;display:flex;align-items:center;gap:4px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dv-id .cdv{font-size:8px;color:#8FAFD2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dv-id .st{display:flex;align-items:center;gap:6px;font-size:8px;color:#8FAFD2}
-.pill{font-size:8px;font-weight:700;padding:1px 5px;border-radius:2px;border:1px solid transparent;line-height:12px}
-.pill.run{color:#7CF0C4;background:rgba(0,161,123,.18);border-color:rgba(0,161,123,.5)}
-.pill.wait{color:#F7D888;background:rgba(242,201,76,.16);border-color:rgba(242,201,76,.45)}
-.pill.err{color:#FFA8A8;background:rgba(235,73,73,.18);border-color:rgba(235,73,73,.5)}
-.pill.off{color:#A6C6E8;background:rgba(110,146,188,.16);border-color:rgba(110,146,188,.4)}
-.kv6{flex:none;display:grid;grid-template-columns:1fr 1fr;gap:0 10px;margin-top:6px}
-.kv6>div{display:flex;align-items:center;justify-content:space-between;gap:4px;height:19px;font-size:8.5px;
-  border-bottom:1px dashed rgba(46,163,255,.13)}
-.kv6 span{color:#8FAFD2;white-space:nowrap}
-.kv6 b{color:#EAF3FF;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dv-btns{flex:none;display:flex;gap:5px;margin-top:auto;padding-top:5px}
-.wsb{flex:1;height:21px;border-radius:3px;background:#0F2A50;border:1px solid #1F5290;color:#BFD8F2;
+/* 播放控制条 */
+.ws-ctl{flex:none;display:flex;align-items:center;gap:6px;height:24px;margin-top:5px;padding:0 2px}
+.ws-ctl .cbtn{width:15px;height:15px;flex:none;background:none;border:0;color:#BFD8F2;font-size:9px;
+  display:flex;align-items:center;justify-content:center;padding:0;line-height:1}
+.ws-ctl .cbtn:hover{color:#2EA3FF}
+.ws-ctl .cbtn svg{display:block}
+.ws-ctl .clb{font-size:8.5px;color:#9EC0E4;flex:none;white-space:nowrap}
+.ws-ctl .crail{flex:1;height:3px;background:#15325A;border-radius:2px;position:relative;min-width:0;cursor:pointer}
+.ws-ctl .crail i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#155AC0,#2EA3FF);border-radius:2px}
+.ws-ctl .crail b{position:absolute;top:50%;width:7px;height:7px;margin:-3.5px 0 0 -3.5px;border-radius:50%;
+  background:#EAF3FF;box-shadow:0 0 6px rgba(46,163,255,.9)}
+.ws-ctl .ctm{font-size:8px;color:#8FAFD2;flex:none;font-variant-numeric:tabular-nums}
+
+/* 说明行 + 工位切换浮层 */
+.ws-cap{flex:none;display:flex;align-items:center;gap:6px;margin-top:4px}
+.ws-cap span{font-size:8.5px;color:#9EC0E4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ws-cap .sw{margin-left:auto;flex:none;height:17px;padding:0 6px;border-radius:2px;background:#0F2A50;
+  border:1px solid #1F5290;color:#BFD8F2;font-size:8px;white-space:nowrap;transition:.15s}
+.ws-cap .sw:hover{border-color:#2EA3FF;color:#fff}
+.ws-pop{position:absolute;right:6px;bottom:52px;width:200px;padding:6px;z-index:12;
+  background:rgba(8,18,40,.97);border:1px solid #2A5C9E;border-radius:4px;
+  box-shadow:0 10px 26px rgba(2,12,38,.72);
+  display:none;grid-template-columns:repeat(4,1fr);gap:4px}
+.ws-pop.open{display:grid}
+.ws-chip{height:22px;border-radius:3px;background:#0C2242;border:1px solid #1B3E68;color:#A6C6E8;
+  font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:3px;padding:0;
+  font-variant-numeric:tabular-nums;transition:background .15s,border-color .15s,color .15s}
+.ws-chip i{width:4px;height:4px;border-radius:50%;flex:none;background:#00A17B}
+.ws-chip.wait i{background:#F2C94C}
+.ws-chip.err i{background:#EB4949}
+.ws-chip.off i{background:#5F7A99}
+.ws-chip:hover{border-color:#2EA3FF;color:#EAF3FF}
+.ws-chip.on{background:linear-gradient(180deg,#2E9BF6,#0A5A9E);border-color:#BBDFFF;color:#fff;
+  box-shadow:0 0 8px rgba(46,163,255,.5)}
+.ws-chip.on i{background:#fff;box-shadow:0 0 6px #fff}
+
+/* ---------- 卡2：当前任务 ---------- */
+.ws-task{flex:1;display:flex;gap:9px;min-height:0}
+.wt-left{flex:0 0 49%;display:flex;flex-direction:column;min-width:0}
+.wt-lb{flex:none;font-size:9px;color:#A6C6E8;margin-bottom:4px}
+.wt-vid{flex:1;min-height:0;position:relative;border-radius:3px;overflow:hidden;border:1px solid #1B3E68;
+  background:radial-gradient(120% 100% at 50% 0%,#17407A,#0A1730);
+  display:flex;align-items:center;justify-content:center}
+.wt-vid .vfeed{background-size:300% auto;opacity:.62;filter:brightness(.74) saturate(.75)}
+.wt-vid .tag{position:relative;z-index:2;font-size:8.5px;color:#BCD6F0;letter-spacing:.4px;
+  background:rgba(4,16,36,.55);padding:1px 6px;border-radius:2px}
+.wt-right{flex:1;min-width:0;display:flex;flex-direction:column;min-height:0}
+.wt-t{flex:none;font-size:11px;font-weight:700;color:#EAF3FF;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wt-kv{flex:none;display:flex;align-items:baseline;gap:4px;font-size:8.5px;color:#8FAFD2;margin-top:5px;min-width:0}
+.wt-kv b{color:#DCEBFF;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wt-out{flex:none;display:flex;align-items:baseline;gap:4px;font-size:9px;color:#8FAFD2;margin-top:8px}
+.wt-out b{font-size:14px;font-weight:700;color:#EAF3FF;font-variant-numeric:tabular-nums;line-height:1}
+.wt-out em{font-style:normal;font-size:8.5px;color:#9EC0E4}
+.wt-bar{flex:none;height:5px;background:#15325A;border-radius:3px;overflow:hidden;margin-top:5px}
+.wt-bar i{display:block;height:100%;background:linear-gradient(90deg,#155AC0,#2EA3FF);border-radius:3px}
+.wt-meta{flex:none;font-size:8px;color:#8FAFD2;margin-top:4px}
+.wt-meta b{color:#2EA3FF;font-variant-numeric:tabular-nums}
+.wt-btns{flex:none;display:flex;gap:6px;justify-content:flex-end;margin-top:auto;padding-top:6px}
+.wsb{height:20px;padding:0 10px;border-radius:3px;background:#0F2A50;border:1px solid #1F5290;color:#BFD8F2;
   font-size:9px;transition:.15s;white-space:nowrap}
 .wsb:hover{border-color:#2EA3FF;color:#fff;background:#12386C}
-.wsb.ghost{flex:0 0 auto;padding:0 8px;background:transparent;border-style:dashed;color:#9EC0E4}
 
-.rk2{flex:1;display:flex;gap:6px;min-height:0}
-.rkc{flex:1;display:flex;align-items:center;gap:5px;background:#10294F;border:1px solid #1B3E68;
-  border-radius:4px;padding:2px 5px;min-width:0}
-.rkc b{display:block;font-size:15px;font-weight:700;color:#EAF3FF;line-height:1.15;
-  font-variant-numeric:tabular-nums}
-.rkc span{display:block;font-size:7.5px;color:#8FAFD2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.rk3{flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:5px}
-.rk3>div{background:#0E2547;border:1px solid #1B3E68;border-radius:3px;padding:2px 0;text-align:center}
-.rk3 b{display:block;font-size:11px;color:#2EA3FF;font-weight:700;line-height:1.25;
-  font-variant-numeric:tabular-nums}
-.rk3 span{display:block;font-size:7.5px;color:#8FAFD2}
-.dlg{display:flex;flex-direction:column;gap:1px;font-size:8px;color:#B4CFE8;width:100%;margin-top:2px}
-.dlg>div{display:flex;align-items:center;gap:4px}
-.dlg i{width:6px;height:6px;border-radius:1px;flex:none}
-.dlg b{margin-left:auto;color:#EAF3FF;font-variant-numeric:tabular-nums}
+/* ---------- 右栏：关键生产指标 ---------- */
+.rk-big{flex:1;display:flex;gap:8px;min-height:0}
+.rkb{flex:1;display:flex;align-items:center;gap:8px;min-width:0;
+  background:#10294F;border:1px solid #1B3E68;border-radius:4px;padding:2px 8px}
+.rkb .ico{width:26px;height:26px;border-radius:50%;flex:none;
+  background:radial-gradient(circle at 34% 26%,#6C93C6 0%,#33517A 40%,#16273F 100%);
+  border:1px solid #35608F;box-shadow:0 0 10px rgba(46,163,255,.2),inset 0 1px 2px rgba(255,255,255,.22)}
+.rkb .num{display:flex;flex-direction:column;min-width:0}
+.rkb .num b{font-size:19px;font-weight:700;color:#EAF3FF;line-height:1.05;font-variant-numeric:tabular-nums}
+.rkb .num span{font-size:7.5px;color:#8FAFD2;white-space:nowrap}
+.rk-small{flex:none;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.rks{display:flex;align-items:center;gap:5px;background:#0E2547;border:1px solid #1B3E68;border-radius:3px;
+  padding:3px 5px;min-width:0}
+.rks .sq{width:16px;height:16px;flex:none;border-radius:2px;border:1px solid #35608F;
+  background:linear-gradient(145deg,#6C93C6 0%,#33517A 45%,#182B45 100%);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.2)}
+.rks .txt{display:flex;flex-direction:column;min-width:0}
+.rks .txt span{font-size:7.5px;color:#8FAFD2;white-space:nowrap}
+.rks .txt b{font-size:12px;color:#EAF3FF;font-weight:700;line-height:1.2;font-variant-numeric:tabular-nums}
+
+/* ---------- 右栏：订单统计 ---------- */
+.ord{display:flex;flex-direction:column;gap:1px;width:100%;margin-top:2px}
+.ord .row{display:flex;align-items:center;gap:4px;font-size:8px;color:#B4CFE8;min-width:0}
+.ord .row i{width:6px;height:6px;border-radius:1px;flex:none}
+.ord .row b{margin-left:auto;color:#EAF3FF;font-variant-numeric:tabular-nums}
+.ord .t{font-size:9px;color:#A6C6E8;text-align:center}
+
+/* ---------- 场景标记高亮 ---------- */
 .mk.clickable .mk-st{cursor:pointer}
 .mk.clickable:hover .mk-lb{background:rgba(46,163,255,.82);color:#04223A;font-weight:700}
 .mk.act .mk-st{outline:2px solid #BBDFFF;outline-offset:1px;box-shadow:0 0 14px rgba(46,163,255,.75)}
@@ -510,6 +533,7 @@ img{user-select:none}
 .mk.act::after{content:"";position:absolute;left:10px;top:10px;width:20px;height:20px;margin:-10px 0 0 -10px;
   border-radius:50%;border:1px solid rgba(46,163,255,.9);animation:pulse 1.8s ease-out infinite;pointer-events:none}
 @keyframes pulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.4);opacity:0}}
+
 </style>
 </head>
 <body data-page-node-id="hvaWQy30kB9cu81A62Gu5n">
@@ -858,37 +882,37 @@ var PROD = [
   { name:"生产综合", key:"production", base:"orderPlan", tab:1 }
 ];
 
-/* 工作站页数据：按工位号索引的设备信息（型号 / 编码 / 位置 / 产能 / 巡检） */
+/* 工作站页数据：任务编号 / 工艺时长 / 关键物料（按工位号索引） */
 var WS_DEV = {
-  P01:{m:"RB-1200 网片焊机",c:"RB-1200-001",p:"A 区 · 钢筋加工线",cap:96,f:4},
-  P02:{m:"CP-80 激光整平机",c:"CP-80-002",p:"A 区 · 底板工位",cap:71,f:3},
-  P03:{m:"TP-45 铺贴机器人",c:"TP-45-003",p:"B 区 · 地砖工位",cap:45,f:2},
-  P04:{m:"SP-320 无气喷涂机",c:"SP-320-004",p:"B 区 · 腻子工位",cap:85,f:4},
-  P05:{m:"GD-260 墙面打磨机",c:"GD-260-005",p:"B 区 · 打磨工位",cap:36,f:5},
-  P06:{m:"SP-350 底漆喷涂机",c:"SP-350-006",p:"B 区 · 喷涂工位",cap:65,f:3},
-  P07:{m:"MC-50A 四轴机械臂",c:"MC-50A-001",p:"C 区 · 墙板拼装线",cap:79,f:4},
-  P08:{m:"WR-600 自动焊接站",c:"WR-600-008",p:"C 区 · 墙板焊接线",cap:89,f:4},
-  P09:{m:"GL-90 打胶机器人",c:"GL-90-009",p:"C 区 · 窗框工位",cap:57,f:2},
-  P10:{m:"CB-30 柜体安装机",c:"CB-30-010",p:"D 区 · 洁具工位",cap:13,f:1},
-  P11:{m:"CR-15 顶板吊装机",c:"CR-15-011",p:"D 区 · 顶板工位",cap:75,f:3},
-  P12:{m:"QC-20 质检下线站",c:"QC-20-012",p:"E 区 · 成品下线",cap:102,f:5}
+  P01:{m:"RB-1200 网片焊机",c:"RB-1200-001",p:"A 区 · 钢筋加工线",cap:96,f:4,t:"MIC-01A",dur:45,mat:"钢筋网片 6mm"},
+  P02:{m:"CP-80 激光整平机",c:"CP-80-002",p:"A 区 · 底板工位",cap:71,f:3,t:"MIC-02B",dur:38,mat:"C30 混凝土"},
+  P03:{m:"TP-45 铺贴机器人",c:"TP-45-003",p:"B 区 · 地砖工位",cap:45,f:2,t:"PC-03A",dur:52,mat:"600×600 地砖"},
+  P04:{m:"SP-320 无气喷涂机",c:"SP-320-004",p:"B 区 · 腻子工位",cap:85,f:4,t:"MIC-04C",dur:42,mat:"界面剂 20L"},
+  P05:{m:"GD-260 墙面打磨机",c:"GD-260-005",p:"B 区 · 打磨工位",cap:36,f:5,t:"MIC-05A",dur:35,mat:"240# 砂纸"},
+  P06:{m:"SP-350 底漆喷涂机",c:"SP-350-006",p:"B 区 · 喷涂工位",cap:65,f:3,t:"MIC-06B",dur:40,mat:"抗碱底漆 18L"},
+  P07:{m:"MC-50A 四轴机械臂",c:"MC-50A-001",p:"C 区 · 墙板拼装线",cap:79,f:4,t:"MIC-03A",dur:60,mat:"41PC板"},
+  P08:{m:"WR-600 自动焊接站",c:"WR-600-008",p:"C 区 · 墙板焊接线",cap:89,f:4,t:"MIC-07A",dur:55,mat:"焊丝 ER50-6"},
+  P09:{m:"GL-90 打胶机器人",c:"GL-90-009",p:"C 区 · 窗框工位",cap:57,f:2,t:"PC-09A",dur:48,mat:"硅酮密封胶"},
+  P10:{m:"CB-30 柜体安装机",c:"CB-30-010",p:"D 区 · 洁具工位",cap:13,f:1,t:"PC-10B",dur:65,mat:"洁具柜体"},
+  P11:{m:"CR-15 顶板吊装机",c:"CR-15-011",p:"D 区 · 顶板工位",cap:75,f:3,t:"MIC-11A",dur:58,mat:"预制顶板"},
+  P12:{m:"QC-20 质检下线站",c:"QC-20-012",p:"E 区 · 成品下线",cap:102,f:5,t:"QC-12A",dur:30,mat:"包装托盘"}
 };
 
 var MODULES = {
   /* ---------- 工作站（首页）：左栏随工位切换，右栏统计固定 ---------- */
   station:{ name:"工作站", key:"station",
     left:[
-      {t:"产线工作站", fx:1.42, type:"wsMonitor",
-       hrightFn:function(){ return '<span class="ws-live"><i></i>实时</span>工位 <b id="wsHead">'+state.station+'</b>'; }},
-      {t:"工位设备", fx:1.02, type:"wsDevice"}
+      {t:"工序模拟", fx:1.02, type:"wsSim", noHead:true, noScroll:true},
+      {t:"当前任务", fx:1.14, type:"wsTask",
+       hright:'<span class="link" id="wsDetail">生产详情 ›</span>'}
     ],
     right:[
-      {t:"生产数据指标", fx:1.36, type:"statKpi"},
-      {t:"产线故障数据", link:"查看更多", fx:1.5, type:"lineFault"},
-      {t:"设备故障结果", fx:1.45, type:"equipFault"},
-      {t:"质量检测数据", fx:1.55, type:"qualityTrend2", link:"查看更多",
-       hright:'返修 <b style="color:#4FE3C8">1.3%</b> · 事故 <b style="color:#E5B964">0.3%</b>'}
+      {t:"关键生产指标", fx:1.2, type:"statKey"},
+      {t:"产能指标数据", link:"查看详情", fx:1.36, type:"capacityStats"},
+      {t:"设备在线率", link:"查看详情", fx:1.4, type:"onlineRate"},
+      {t:"质量指标数据", link:"查看详情", fx:1.34, type:"qualityRates"}
     ]},
+
   orderPlan: PROD[0],
   production: PROD[0],   // 同一套卡片，默认展示“次月”页签
   equipment:{ name:"设备运行", key:"equipment",
@@ -1069,6 +1093,39 @@ function chartBars(o){
   }
   return s+'</svg>';
 }
+/* 分组柱 + 折线（双轴）：左轴柱状，右轴折线 */
+function chartBarsLine(o){
+  var w=o.w||412,h=o.h||112,labels=o.labels,series=o.series,max=o.max||1000,rmax=o.rmax||100;
+  var ticks=o.ticks||4, pad={l:26,r:26,t:8,b:13};
+  var iw=w-pad.l-pad.r, ih=h-pad.t-pad.b, n=labels.length;
+  var slot=iw/n, groupW=slot*0.58, bw=(groupW-(series.length-1)*1.2)/series.length;
+  var s='<svg viewBox="0 0 '+w+' '+h+'">', t;
+  for(t=0;t<=ticks;t++){
+    var gy=pad.t+ih-ih*t/ticks;
+    s+='<line x1="'+pad.l+'" y1="'+gy+'" x2="'+(w-pad.r)+'" y2="'+gy+'" stroke="#1A3355" stroke-width="1"/>'+
+       '<text x="'+(pad.l-4)+'" y="'+(gy+2.5)+'" fill="#6E92BC" font-size="7" text-anchor="end">'+Math.round(max*t/ticks)+'</text>'+
+       '<text x="'+(w-pad.r+4)+'" y="'+(gy+2.5)+'" fill="#6E92BC" font-size="7">'+Math.round(rmax*t/ticks)+'</text>';
+  }
+  for(var i=0;i<n;i++){
+    var gx=pad.l+slot*i+(slot-groupW)/2;
+    series.forEach(function(se,si){
+      var v=se.data[i], bh=Math.max(1,ih*v/max), x=gx+si*(bw+1.2);
+      s+='<rect x="'+x+'" y="'+(pad.t+ih-bh)+'" width="'+bw+'" height="'+bh+'" rx="1" fill="'+se.color+'">'+
+         '<animate attributeName="height" from="0" to="'+bh+'" dur="0.6s" fill="freeze"/>'+
+         '<animate attributeName="y" from="'+(pad.t+ih)+'" to="'+(pad.t+ih-bh)+'" dur="0.6s" fill="freeze"/></rect>';
+    });
+    s+='<text x="'+(pad.l+slot*(i+0.5))+'" y="'+(h-3)+'" fill="#6E92BC" font-size="7" text-anchor="middle">'+labels[i]+'</text>';
+  }
+  if(o.line){
+    var pts=[];
+    o.line.data.forEach(function(v,i){ pts.push((pad.l+slot*(i+0.5)).toFixed(1)+","+(pad.t+ih-ih*v/rmax).toFixed(1)); });
+    s+='<polyline points="'+pts.join(" ")+'" fill="none" stroke="'+o.line.color+'" stroke-width="1.6"/>';
+    o.line.data.forEach(function(v,i){
+      s+='<circle cx="'+(pad.l+slot*(i+0.5))+'" cy="'+(pad.t+ih-ih*v/rmax)+'" r="2" fill="'+o.line.color+'"/>';
+    });
+  }
+  return s+'</svg>';
+}
 function chartLines(o){
   var w=o.w||260,h=o.h||90,labels=o.labels,series=o.series,max=o.max,min=o.min||0,dec=o.dec||0,pad={l:24,r:4,t:6,b:12};
   var iw=w-pad.l-pad.r, ih=h-pad.t-pad.b;
@@ -1208,119 +1265,122 @@ function cb(c, m, f){
   switch(c.type){
 
     /* ---------- 工作站（首页）：左栏随工位切换 ---------- */
-    case "wsMonitor": {
-      var ws=findStation(state.station), wdev=wsDev(ws), num=ws.id.replace(/[A-Z]+/,"");
+    case "wsSim": {
+      var s=findStation(state.station), num=s.id.replace(/[A-Z]+/,"");
       var chips="";
       FLOORS[state.floor].stations.forEach(function(st){
         var cl=st.status==="运行"?"run":st.status==="待机"?"wait":st.status==="故障"?"err":"off";
-        chips+='<button class="ws-chip '+cl+(st.id===ws.id?" on":"")+'" data-st="'+st.id+'" title="'+st.id+' '+st.name+'">'+
+        chips+='<button class="ws-chip '+cl+(st.id===s.id?" on":"")+'" data-st="'+st.id+'" title="'+st.id+' '+st.name+'">'+
           st.id.replace(/[A-Z]+/,"")+'<i></i></button>';
       });
-      return '<div class="ws-chips">'+chips+'</div>'+
-        '<div class="ws-vid'+(wsPlay?"":" paused")+'" id="wsVid">'+
-          '<div class="vfeed" style="background-image:url('+IMG+'u71.png);background-position:'+
-            Math.round(ws.x)+'% '+Math.round(ws.y)+'%"></div>'+
-          '<div class="vtint"></div>'+
-          '<div class="vgrid"></div>'+
-          '<div class="vret"><span class="r1"></span><span class="r2"></span><span class="r3"></span></div>'+
-          '<div class="vbox"><span class="lb">工件定位 99.2%</span></div>'+
-          '<div class="vscan"></div>'+
-          '<div class="vrec"><i></i>REC · CAM-'+num+'</div>'+
-          '<div class="vres">1080P · 25fps</div>'+
-          '<button class="vplay" id="wsPlay" title="播放 / 暂停">'+(wsPlay?"❚❚":"▶")+'</button>'+
-          '<div class="vfoot"><b>'+ws.id+' '+ws.name+'</b><span>'+ws.code+' · '+wdev.p+'</span></div>'+
-          '<i class="vc tl"></i><i class="vc tr"></i><i class="vc bl"></i><i class="vc br"></i>'+
-        '</div>'+
-        '<div class="mini" style="margin-top:5px"><span>工步 <b style="color:#EAF3FF">'+ws.step+'/5</b> · '+STEPS[ws.step-1]+
-          '</span><b style="color:#2EA3FF" id="wsPct">'+ws.progress+'%</b></div>'+
-        '<div class="pbar" style="margin-top:3px;height:4px"><i id="wsBar" style="width:'+ws.progress+'%"></i></div>'+
-        '<div class="mini" style="margin-top:4px"><span id="wsStat">'+wsStatText(ws)+'</span><span id="wsLat">延时 '+
-          (ws.status==="离线"?"--":(56+Math.round(Math.random()*18)))+' ms</span></div>';
-    }
-    case "wsDevice": {
-      var ws2=findStation(state.station), d2=wsDev(ws2), n2=ws2.id.replace(/[A-Z]+/,"");
-      var pc={运行:"run",待机:"wait",故障:"err",离线:"off"}[ws2.status];
-      var kv=function(k,v){ return '<div><span>'+k+'</span><b>'+v+'</b></div>'; };
-      return '<div class="dv-top">'+
-          '<div class="dv-thumb"><div class="vfeed" style="background-image:url('+IMG+'u71.png);background-position:'+
-            Math.round(ws2.x)+'% '+Math.round(ws2.y)+'%"></div><div class="vtint"></div><div class="vgrid"></div>'+
-            '<span class="rec"><i></i>LIVE</span>'+
-            '<span class="cd">CAM-'+n2+'</span></div>'+
-          '<div class="dv-id">'+
-            '<div class="nm"><svg style="width:13px;height:13px;display:block;flex:none" viewBox="0 0 24 24" fill="none" '+
-              'stroke="#2EA3FF" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+
-              '<path d="M4 21v-8l5-3 4 5 4-4"/><circle cx="4" cy="21" r="1.4" fill="#2EA3FF" stroke="none"/>'+
-              '<path d="M17 11l3-3"/></svg>'+d2.m+'</div>'+
-            '<div class="cdv">设备编号 '+d2.c+'</div>'+
-            '<div class="st"><span class="pill '+pc+'">'+ws2.status+'</span><span>'+
-              (ws2.status==="运行"?"已连续运行 4h 26m":ws2.status==="待机"?"待料 12 min":
-               ws2.status==="故障"?"停机待修 8 min":"离线 · 待维护")+'</span></div>'+
+      return '<div class="ws-sim">'+
+          '<div class="ws-vid'+(wsPlay?"":" paused")+'" id="wsVid">'+
+            '<div class="vfeed" style="background-image:url('+IMG+'u71.png);background-position:'+
+              Math.round(s.x)+'% '+Math.round(s.y)+'%"></div>'+
+            '<div class="vtint"></div><div class="vgrid"></div>'+
+            '<div class="vret"><span class="r1"></span><span class="r2"></span><span class="r3"></span></div>'+
+            '<div class="vbox"><span class="lb">工件定位 99.2%</span></div>'+
+            '<div class="vscan"></div>'+
+            '<div class="vrec"><i></i>REC · CAM-'+num+'</div>'+
+            '<div class="vres">16:9 · 1080P</div>'+
+            '<button class="vplay" id="wsPlay" title="播放 / 暂停">'+(wsPlay?"❚❚":"▶")+'</button>'+
           '</div>'+
+          '<div class="ws-ctl">'+
+            '<button class="cbtn" id="wsPlay2" title="播放 / 暂停">'+(wsPlay?"❚❚":"▶")+'</button>'+
+            '<span class="clb" id="wsPlayLb">'+(wsPlay?"暂停":"播放")+'</span>'+
+            '<div class="crail" id="wsRail"><i id="wsRailFill" style="width:'+s.progress+'%"></i>'+
+              '<b id="wsRailDot" style="left:'+s.progress+'%"></b></div>'+
+            '<span class="ctm" id="wsTime">'+wsTimeText(s)+'</span>'+
+            '<button class="cbtn" id="wsVol" title="音量">'+
+              '<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="#BFD8F2" stroke-width="1.8" '+
+              'stroke-linecap="round"><path d="M4 9.5h3.5L12 6v12L7.5 14.5H4z" fill="#BFD8F2" stroke="none"/>'+
+              '<path d="M15.5 9a4 4 0 0 1 0 6"/></svg></button>'+
+          '</div>'+
+          '<div class="ws-cap"><span id="wsCap">'+s.code+' '+s.name+' · 工序模型视频</span>'+
+            '<button class="sw" id="wsSwitch">切换工位 ▾</button></div>'+
         '</div>'+
-        '<div class="kv6">'+
-          kv("设备位置",d2.p)+kv("巡检频次",d2.f+" 次/班")+
-          kv("产量产能",d2.cap+" 件/h")+kv("设备节拍",ws2.takt)+
-          kv("综合 OEE",ws2.oee+"%")+kv("在线率",ws2.online+"%")+
-        '</div>'+
-        '<div class="dv-btns">'+
-          '<button class="wsb" data-toast="参数详情：'+d2.m+' · 主轴转速 3200 rpm · 重复定位精度 ±0.02 mm（模拟）">参数详情</button>'+
-          '<button class="wsb" data-toast="工艺标准：'+ws2.name+' · 执行 Q/CDL-MB-2026 模块建筑工艺标准（模拟）">工艺标准</button>'+
-          '<button class="wsb ghost" id="wsDetail" title="查看该工位生产详情">生产详情 ›</button>'+
+        '<div class="ws-pop" id="wsPop">'+chips+'</div>';
+    }
+    case "wsTask": {
+      var s2=findStation(state.station), d2=wsDev(s2);
+      return '<div class="ws-task">'+
+          '<div class="wt-left">'+
+            '<div class="wt-lb">实时监控</div>'+
+            '<div class="wt-vid">'+
+              '<div class="vfeed" style="background-image:url('+IMG+'u71.png);background-position:'+
+                Math.round(s2.x)+'% '+Math.round(s2.y)+'%"></div>'+
+              '<div class="vtint"></div><div class="vgrid"></div>'+
+              '<span class="tag">实时监控画面 · 16:9</span>'+
+            '</div>'+
+          '</div>'+
+          '<div class="wt-right">'+
+            '<div class="wt-t">'+d2.t+' '+s2.name+'</div>'+
+            '<div class="wt-kv"><span>所属项目</span><b>先进院模块化建筑项目</b></div>'+
+            '<div class="wt-kv"><span>工艺时长</span><b>'+d2.dur+' min</b></div>'+
+            '<div class="wt-kv"><span>关键物料</span><b>'+d2.mat+'</b></div>'+
+            '<div class="wt-out"><span>当前产量</span><b>'+s2.output+'</b><em>/'+s2.plan+' 片</em></div>'+
+            '<div class="wt-bar"><i style="width:'+s2.progress+'%"></i></div>'+
+            '<div class="wt-meta">进度 <b>'+s2.progress+'%</b> · 当前节拍：<b>'+s2.takt+'</b></div>'+
+            '<div class="wt-btns">'+
+              '<button class="wsb" id="wsAllCam">全部监控</button>'+
+              '<button class="wsb" id="wsAnim">工艺动画</button>'+
+            '</div>'+
+          '</div>'+
         '</div>';
     }
 
     /* ---------- 工作站：右栏统计（固定，不随工位变化） ---------- */
-    case "statKpi": {
-      var rc=function(pct,color){
-        return chartDonut({w:54,h:54,segments:[{v:pct,color:color},{v:100-pct,color:"#0C2242"}],
-          center:pct+"%",centerSub:"",csize:10,ssize:0});
-      };
-      return '<div class="rk2">'+
-          '<div class="rkc"><div style="width:54px;height:54px;flex:none">'+rc(78,"#2EA3FF")+'</div>'+
-            '<div style="min-width:0"><b>936</b><span>实际产量 / 计划 1,200</span></div></div>'+
-          '<div class="rkc"><div style="width:54px;height:54px;flex:none">'+rc(98,"#4FE3C8")+'</div>'+
-            '<div style="min-width:0"><b>258</b><span>合格产量 / 下线 264</span></div></div>'+
+    case "statKey": {
+      return '<div class="rk-big">'+
+          '<div class="rkb"><span class="ico"></span><div class="num"><b>19</b><span>在产项目数量</span></div></div>'+
+          '<div class="rkb"><span class="ico"></span><div class="num"><b>128</b><span>产品下线数量</span></div></div>'+
         '</div>'+
-        '<div class="rk3">'+
-          '<div><b>97%</b><span>节拍达成</span></div>'+
-          '<div><b>95%</b><span>设备利用率</span></div>'+
-          '<div><b>98.3%</b><span>一次合格率</span></div>'+
+        '<div class="rk-small">'+
+          '<div class="rks"><span class="sq"></span><div class="txt"><span>设备在线率</span><b>97%</b></div></div>'+
+          '<div class="rks"><span class="sq"></span><div class="txt"><span>OEE综合效率</span><b>86%</b></div></div>'+
+          '<div class="rks"><span class="sq"></span><div class="txt"><span>质检合格率</span><b>98%</b></div></div>'+
         '</div>';
     }
-    case "lineFault": {
-      var dl=function(lb,v,c){ return '<div><i style="background:'+c+'"></i>'+lb+'<b>'+v+'</b></div>'; };
+    case "capacityStats": {
+      var row=function(lb,v,c){ return '<div class="row"><i style="background:'+c+'"></i>'+lb+'<b>'+v+'</b></div>'; };
       return '<div style="flex:1;min-height:0;display:flex;gap:7px">'+
-          '<div style="flex:1.75;min-width:0;display:flex;flex-direction:column;min-height:0">'+
-            '<div class="chart-box">'+chartBars({w:258,h:88,labels:["08","10","12","14","16","18"],max:12,ticks:3,stacked:true,
-              series:[{color:"#2EA3FF",data:[2,3,1,4,2,3]},
-                      {color:"#7B9BFF",data:[1,2,2,1,3,1]},
-                      {color:"#38C8F0",data:[1,1,2,1,1,2]}]})+'</div>'+
-            legend([["机械","#2EA3FF"],["电气","#7B9BFF"],["物料","#38C8F0"]])+
+          '<div style="flex:1.9;min-width:0;display:flex;flex-direction:column;min-height:0">'+
+            '<div style="flex:none;display:flex;justify-content:flex-end">'+
+              legend([["MIC数量","#2EA3FF"],["PC数量","#7B9BFF"],["方量","#4FE3C8"]])+'</div>'+
+            '<div class="chart-box">'+chartBars({w:250,h:82,labels:["1月","2月","3月","4月","5月","6月","7月","8月"],
+              max:40,ticks:4,
+              series:[{color:"#2EA3FF",data:[10,8,12,9,11,10,13,12]},
+                      {color:"#7B9BFF",data:[30,26,34,28,36,32,38,35]},
+                      {color:"#4FE3C8",data:[12,14,11,16,13,15,12,17]}]})+'</div>'+
           '</div>'+
-          '<div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">'+
-            '<div style="width:72px;height:66px;flex:none">'+
-              chartDonut({w:72,h:66,segments:[{v:10,color:"#2EA3FF"},{v:6,color:"#7B9BFF"},{v:5,color:"#38C8F0"}],
-                center:"21",centerSub:"故障数",csize:13,ssize:6.5})+'</div>'+
-            '<div class="dlg">'+dl("加工中心",10,"#2EA3FF")+dl("输送线",6,"#7B9BFF")+dl("辅助设备",5,"#38C8F0")+'</div>'+
+          '<div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:0">'+
+            '<div class="ord"><div class="t">订单统计</div>'+
+              '<div style="width:72px;height:62px;align-self:center">'+
+                chartDonut({w:72,h:62,segments:[{v:10,color:"#2EA3FF"},{v:200,color:"#1B4E86"}],
+                  center:"210",centerSub:"订单",csize:12,ssize:6.5})+'</div>'+
+              row("MIC订单",10,"#2EA3FF")+row("PC订单",200,"#1B4E86")+
+            '</div>'+
           '</div>'+
         '</div>';
     }
-    case "equipFault": {
+    case "onlineRate": {
       return '<div style="flex:none;display:flex;justify-content:flex-end">'+
-          legend([["机械","#2EA3FF"],["电气","#7B9BFF"],["液压","#4FE3C8"],["程序","#E5B964"]])+'</div>'+
-        '<div class="chart-box">'+chartBars({w:412,h:85,labels:["焊机","机械臂","喷涂机","打磨机","质检站"],max:6,ticks:3,
-          series:[{color:"#2EA3FF",data:[5,3,2,4,1]},
-                  {color:"#7B9BFF",data:[2,4,3,1,2]},
-                  {color:"#4FE3C8",data:[1,2,1,2,3]},
-                  {color:"#E5B964",data:[0,1,2,1,1]}]})+'</div>';
+          legend([["在线","#2EA3FF"],["离线","#7B9BFF"],["异常","#E5B964"],["在线率","#4FE3C8"]])+'</div>'+
+        '<div class="chart-box">'+chartBarsLine({w:412,h:88,labels:["1月","2月","3月","4月","5月","6月","7月","8月"],
+          max:1000,rmax:100,ticks:4,
+          series:[{color:"#2EA3FF",data:[680,540,590,610,650,640,600,660]},
+                  {color:"#7B9BFF",data:[90,80,110,70,60,95,85,70]},
+                  {color:"#E5B964",data:[30,20,40,25,35,30,45,28]}],
+          line:{color:"#4FE3C8",data:[85,88,86,90,92,89,87,93]}})+'</div>';
     }
-    case "qualityTrend2": {
+    case "qualityRates": {
       return '<div style="flex:none;display:flex;justify-content:flex-end">'+
-          legend([["一次合格率","#2EA3FF"],["目标 98.0%","#93B4D8"]])+'</div>'+
-        '<div class="chart-box">'+chartLines({w:412,h:94,min:96,max:100,dec:0,
-          labels:["1日","2日","3日","4日","5日","6日","7日"],
-          series:[{color:"#2EA3FF",fill:true,data:[97.2,97.6,97.1,98.0,98.2,97.8,98.3]},
-                  {color:"#93B4D8",dash:true,data:[98,98,98,98,98,98,98]}]})+'</div>';
+          legend([["一次合格率","#2EA3FF"],["成品合格率","#E5B964"],["发货合格率","#4FE3C8"]])+'</div>'+
+        '<div class="chart-box">'+chartLines({w:412,h:88,min:90,max:100,dec:0,
+          labels:["1月","2月","3月","4月","5月","6月","7月","8月"],
+          series:[{color:"#2EA3FF",data:[96.2,96.8,97.1,96.5,97.4,97.0,96.6,97.2]},
+                  {color:"#E5B964",data:[95.0,95.6,96.2,95.4,96.0,95.8,95.2,96.1]},
+                  {color:"#4FE3C8",data:[98.5,98.2,98.8,98.4,99.0,98.6,98.3,98.9]}]})+'</div>';
     }
 
     /* ---------- 生产综合 ---------- */
@@ -1852,18 +1912,27 @@ function setFloor(k){
 /* ============================================================
    工作站页：工位切换（左栏联动 / 模型联动 / 右栏统计不变）
    ============================================================ */
-var wsPlay = true;                    // 工位视频取流状态（跨工位切换保持）
+var wsPlay = true;                    // 工序视频播放状态（跨工位切换保持）
+var wsVol = true;                     // 音量开关（模拟）
 function wsDev(s){
-  return WS_DEV[s.id] || {m:s.name,c:s.code+"-"+s.id,p:"主车间 · "+s.id,cap:s.output,f:3};
+  return WS_DEV[s.id] || {m:s.name,c:s.code+"-"+s.id,p:"主车间 · "+s.id,cap:s.output,f:3,
+                          t:s.code+" 任务",dur:50,mat:"通用物料"};
 }
-function wsStatText(s){
-  if(s.status==="离线") return "设备离线 · 等待维护派单";
-  if(s.status==="故障") return "故障停机 · 已派单 王强";
-  if(s.status==="待机") return "待料中 · 上游 AGV 已出发";
-  var n=parseInt(s.id.replace(/[A-Z]+/,""),10)||1;
-  return "AGV-"+(1+(n%4))+"# 已到位 · 机械臂就绪";
+/* 视频时间：按工位进度折算（总时长 3:20） */
+function wsTimeText(s){
+  var total=200, cur=Math.round(total*(s.progress||0)/100);
+  var p=function(n){ return (n<10?"0":"")+n; };
+  return p(Math.floor(cur/60))+":"+p(cur%60);
 }
-/* 切换工位：左栏视频 / 工步 / 设备卡同步刷新，右栏保持不变 */
+function wsSetPlay(v){
+  wsPlay=v;
+  var vid=$("wsVid"); if(vid) vid.classList.toggle("paused",!v);
+  var b1=$("wsPlay"), b2=$("wsPlay2"), lb=$("wsPlayLb");
+  if(b1) b1.textContent=v?"❚❚":"▶";
+  if(b2) b2.textContent=v?"❚❚":"▶";
+  if(lb) lb.textContent=v?"暂停":"播放";
+}
+/* 切换工位：工序视频 / 当前任务同步刷新，右栏保持不变 */
 function selStation(id){
   var s=findStation(id); if(!s || state.station===id) return;
   state.station=id;
@@ -1871,20 +1940,24 @@ function selStation(id){
   $$("#markerLayer .mk[data-st]").forEach(function(m){
     m.classList.toggle("act", m.getAttribute("data-st")===id);
   });
-  toast("工作站切换：<b>"+s.id+" "+s.name+"</b> · 左栏视频与设备信息已同步");
+  toast("工作站切换：<b>"+s.id+" "+s.name+"</b> · 左栏视频与当前任务已同步");
+}
+function closeWsPop(){
+  var p=$("wsPop"); if(p) p.classList.remove("open");
 }
 
 /* ============================================================
    左右栏卡片堆渲染
    ============================================================ */
 function cardWrap(c,fx){
-  return '<div class="card" style="flex:'+fx+'">'+
+  var head = c.noHead ? '' :
     '<div class="card-h"><span class="t'+(c.icon?' hicon':'')+'">'+(c.icon||'')+c.t+(c.sub?'<small style="color:#A6C6E8;font-weight:400;font-size:8.5px;margin-left:5px">'+c.sub+'</small>':'')+'</span>'+
     '<span style="display:flex;align-items:center;gap:10px;min-width:0">'+
       (c.hright?'<span class="hright">'+c.hright+'</span>':'')+
       (c.link?'<span class="link" data-toast="1">'+c.link+' &gt;</span>':'')+
-    '</span></div>'+
-    '<div class="card-b scroll">'+c.body+'</div></div>';
+    '</span></div>';
+  return '<div class="card" style="flex:'+fx+'">'+ head +
+    '<div class="card-b'+(c.noScroll?'':' scroll')+'">'+c.body+'</div></div>';
 }
 function renderLeft(){
   var m=MODULES[state.module], f=FLOORS[state.floor], h="";
@@ -1926,19 +1999,48 @@ function bindCards(){
   $$("button[data-toast]").forEach(function(b){
     b.onclick=function(){ toast(b.getAttribute("data-toast")); };
   });
-  /* 工作站页：工位切换条 / 工位视频播放 / 生产详情 */
+  /* 工作站页：工位切换 / 工序视频控制 / 当前任务动作 */
   $$(".ws-chip").forEach(function(b){
-    b.onclick=function(){ selStation(b.getAttribute("data-st")); };
+    b.onclick=function(ev){ ev.stopPropagation(); selStation(b.getAttribute("data-st")); closeWsPop(); };
   });
-  var wp=$("wsPlay");
-  if(wp) wp.onclick=function(){
-    wsPlay=!wsPlay;
-    var v=$("wsVid"); if(v) v.classList.toggle("paused",!wsPlay);
-    wp.textContent=wsPlay?"❚❚":"▶";
-    toast(wsPlay?"已恢复工位实时画面":"已暂停工位视频取流");
+  var swb=$("wsSwitch");
+  if(swb) swb.onclick=function(ev){
+    ev.stopPropagation();
+    var p=$("wsPop"); if(p) p.classList.toggle("open");
+  };
+  var pb1=$("wsPlay"), pb2=$("wsPlay2");
+  var wsToggle=function(ev){
+    ev.stopPropagation(); wsSetPlay(!wsPlay);
+    toast(wsPlay?"已恢复工序视频播放":"已暂停工序视频");
+  };
+  if(pb1) pb1.onclick=wsToggle;
+  if(pb2) pb2.onclick=wsToggle;
+  var rail=$("wsRail");
+  if(rail) rail.onclick=function(ev){
+    ev.stopPropagation();
+    var r=rail.getBoundingClientRect();
+    var pct=Math.max(0,Math.min(100,Math.round((ev.clientX-r.left)/r.width*100)));
+    var f=$("wsRailFill"), d=$("wsRailDot"), t=$("wsTime");
+    if(f) f.style.width=pct+"%";
+    if(d) d.style.left=pct+"%";
+    if(t) t.textContent=wsTimeText({progress:pct});
+    toast("进度定位：<b>"+pct+"%</b>（模拟拖动）");
+  };
+  var vol=$("wsVol");
+  if(vol) vol.onclick=function(ev){
+    ev.stopPropagation(); wsVol=!wsVol; this.style.opacity=wsVol?1:.4;
+    toast(wsVol?"已开启画面声音":"已静音");
   };
   var wd=$("wsDetail");
   if(wd) wd.onclick=function(){ openStation(state.station); };
+  var acm=$("wsAllCam");
+  if(acm) acm.onclick=function(){ openMonitor(); };
+  var anim=$("wsAnim");
+  if(anim) anim.onclick=function(){
+    var on=$("timeline").classList.toggle("show");
+    var rb=$("btnReplay"); if(rb) rb.classList.toggle("on",on);
+    if(on){ tlPlay(); toast("工艺动画已开启：<b>ADV-01 墙板拼装</b>"); } else tlPause();
+  };
 }
 
 /* ============================================================
@@ -2342,10 +2444,14 @@ function bind(){
   };
   document.addEventListener("click",function(ev){
     var lg=$("legend");
-    if(!lg.classList.contains("open")) return;
-    if(lg.contains(ev.target)||$("vLayer").contains(ev.target)) return;
-    lg.classList.remove("open");
-    $("vLayer").classList.remove("on");
+    if(lg.classList.contains("open") && !lg.contains(ev.target) && !$("vLayer").contains(ev.target)){
+      lg.classList.remove("open");
+      $("vLayer").classList.remove("on");
+    }
+    var pop=$("wsPop"), swb=$("wsSwitch");
+    if(pop && pop.classList.contains("open") && !pop.contains(ev.target) && ev.target!==swb){
+      pop.classList.remove("open");
+    }
   });
   $$("#legend input").forEach(function(cb2){
     cb2.onchange=function(){ renderMarkers(); };
