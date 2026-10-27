@@ -156,7 +156,7 @@ img{user-select:none}
   font-size:11px;color:#A6C6E8;letter-spacing:1px}
 #modelTag::before{content:"";width:3px;height:12px;background:#2EA3FF;border-radius:2px}
 #modelTag b{color:#EAF3FF;font-size:12px}
-#sceneCrumb{position:absolute;left:106px;bottom:9px;z-index:6;font-size:9px;color:#6E92BC;letter-spacing:.5px}
+#sceneCrumb{position:absolute;left:106px;bottom:9px;z-index:6;font-size:9px;color:#C3DAF4;letter-spacing:.5px;background:rgba(4,14,30,.52);padding:2px 7px;border-radius:3px}
 #floorNav{position:absolute;left:9px;top:9px;display:flex;flex-direction:column;gap:4px;z-index:8}
 .floor-btn{width:88px;height:21px;background:rgba(10,22,48,.82);border:1px solid #1F5290;border-radius:3px;
   color:#A6C6E8;font-size:9.5px;text-align:left;padding-left:8px;transition:.15s}
@@ -648,7 +648,7 @@ img{user-select:none}
         <nav id="nav" data-page-node-id="pT3YuCypleOU12V6F4cnVb"></nav>
         <div id="modelWrap" data-page-node-id="TcPnaRdFmCEcGtmKUUeQxN">
           <div id="modelLayer" data-page-node-id="26A4pKO3tJbmQCUy2QM8tW">
-            <img id="modelImg" src="images/13_4指挥中心【有交互】/u71.png" alt="生产线模型占位" data-page-node-id="bEHK69yoyK0pMvavRRcxqe"/>
+            <img id="modelImg" src="images/13_4指挥中心【有交互】/u71_south.png" alt="生产线模型·朝南方向" data-page-node-id="bEHK69yoyK0pMvavRRcxqe"/>
             <svg id="modelSvg" style="display:none" preserveAspectRatio="xMidYMid slice" data-page-node-id="tSFYxiNrG7BFStVznSLk8l"></svg>
           </div>
           <div id="markerLayer" data-page-node-id="3wfDxXenGjz0cf45CnoakI"></div>
@@ -800,30 +800,30 @@ function tpl(o){ o=o||{}; return {
   progress:o.progress||72, output:o.output||79, plan:o.plan||110, takt:o.takt||"32min 23s", step:o.step||4}; }
 
 var FLOORS = {
-  f1:{ name:"1F 产线区域", tag:"脉动产线 · 1F", img:IMG+"u71.png", mul:1, off:{pct:0},
+  f1:{ name:"1F 产线区域", tag:"脉动产线 · 1F", img:IMG+"u71_south.png", mul:1, off:{pct:0},
     stations:[
-      mkSta("P01","钢筋网片加工","RI-01",22.2,23.0,"运行",tpl({progress:88,output:96,plan:110,takt:"28min 10s",step:5,module:"MP20261019002"})),
-      mkSta("P02","底板混凝土平整","RI-02",26.6,13.5,"运行",tpl({progress:64,output:71,plan:110,takt:"35min 02s",step:3,module:"MP20261019003"})),
-      mkSta("P03","地砖铺贴","RI-03",40.0,45.0,"待机",tpl({progress:41,output:45,plan:110,takt:"42min 18s",step:2,module:"MP20261019004",start:"09:30"})),
-      mkSta("P04","界面剂/腻子喷涂","RI-04",47.8,65.0,"运行",tpl({progress:77,output:85,plan:110,takt:"30min 45s",step:4,module:"MP20261019005"})),
-      mkSta("P05","墙面腻子打磨","RI-05",47.9,42.8,"故障",tpl({online:82,oee:61.2,run:4,wait:1,err:2,progress:33,output:36,plan:110,takt:"—",step:3,module:"MP20261019006"})),
-      mkSta("P06","墙面底漆喷涂","RI-06",48.1,16.1,"运行",tpl({progress:59,output:65,plan:110,takt:"33min 26s",step:3,module:"MP20261019007"})),
-      mkSta("P07","墙板拼装","ADV-01",52.0,23.2,"运行",tpl({})),
-      mkSta("P08","墙板焊接","ADV-02",61.6,60.4,"运行",tpl({progress:81,output:89,plan:110,takt:"29min 33s",step:4,module:"MP20261019008"})),
-      mkSta("P09","窗框安装·打胶","ADV-03",59.6,30.2,"待机",tpl({progress:52,output:57,plan:110,takt:"36min 51s",step:2,module:"MP20261019009",start:"10:10"})),
-      mkSta("P10","洁具柜体安装","ADV-04",63.2,22.2,"离线",tpl({online:0,oee:0,run:0,wait:0,err:0,progress:12,output:13,plan:110,takt:"—",step:1,module:"MP20261019010"})),
-      mkSta("P11","顶板安装","ADV-05",66.4,54.2,"运行",tpl({progress:68,output:75,plan:110,takt:"31min 07s",step:3,module:"MP20261019011"})),
-      mkSta("P12","成品下线·质检","QC-01",77.9,46.1,"运行",tpl({progress:93,output:102,plan:110,takt:"26min 40s",step:5,module:"MP20261019012"}))
+      mkSta("P01","钢筋网片加工","RI-01",20.0,46.2,"运行",tpl({progress:88,output:96,plan:110,takt:"28min 10s",step:5,module:"MP20261019002"})),
+      mkSta("P02","底板混凝土平整","RI-02",24.0,36.6,"运行",tpl({progress:64,output:71,plan:110,takt:"35min 02s",step:3,module:"MP20261019003"})),
+      mkSta("P03","地砖铺贴","RI-03",31.6,41.0,"待机",tpl({progress:41,output:45,plan:110,takt:"42min 18s",step:2,module:"MP20261019004",start:"09:30"})),
+      mkSta("P04","界面剂/腻子喷涂","RI-04",34.4,50.2,"运行",tpl({progress:77,output:85,plan:110,takt:"30min 45s",step:4,module:"MP20261019005"})),
+      mkSta("P05","墙面腻子打磨","RI-05",42.4,44.6,"故障",tpl({online:82,oee:61.2,run:4,wait:1,err:2,progress:33,output:36,plan:110,takt:"—",step:3,module:"MP20261019006"})),
+      mkSta("P06","墙面底漆喷涂","RI-06",55.8,40.4,"运行",tpl({progress:59,output:65,plan:110,takt:"33min 26s",step:3,module:"MP20261019007"})),
+      mkSta("P07","墙板拼装","ADV-01",67.0,34.6,"运行",tpl({})),
+      mkSta("P08","墙板焊接","ADV-02",78.5,31.0,"运行",tpl({progress:81,output:89,plan:110,takt:"29min 33s",step:4,module:"MP20261019008"})),
+      mkSta("P09","窗框安装·打胶","ADV-03",82.0,50.0,"待机",tpl({progress:52,output:57,plan:110,takt:"36min 51s",step:2,module:"MP20261019009",start:"10:10"})),
+      mkSta("P10","洁具柜体安装","ADV-04",70.0,53.0,"离线",tpl({online:0,oee:0,run:0,wait:0,err:0,progress:12,output:13,plan:110,takt:"—",step:1,module:"MP20261019010"})),
+      mkSta("P11","顶板安装","ADV-05",70.0,71.0,"运行",tpl({progress:68,output:75,plan:110,takt:"31min 07s",step:3,module:"MP20261019011"})),
+      mkSta("P12","成品下线·质检","QC-01",87.0,70.0,"运行",tpl({progress:93,output:102,plan:110,takt:"26min 40s",step:5,module:"MP20261019012"}))
     ],
     agvs:[
-      {id:"1#",x:71.1,y:27.4,status:"运行",batt:86,task:"配送 WP20261019007 → ADV-01",path:[[71,27],[78,40],[71,55],[62,45],[71,27]],sp:0.0045},
-      {id:"2#",x:55.2,y:26.8,status:"运行",batt:72,task:"配送钢筋网片 → RI-01",path:[[55,27],[48,35],[55,45],[62,35],[55,27]],sp:0.004},
-      {id:"3#",x:68.0,y:44.0,status:"充电",batt:23,task:"返回充电桩",path:[[68,44],[60,55],[68,62],[76,52],[68,44]],sp:0.0032},
-      {id:"4#",x:44.4,y:45.8,status:"运行",batt:64,task:"转运地砖至 RI-03",path:[[44,46],[36,55],[44,63],[52,54],[44,46]],sp:0.0038},
-      {id:"5#",x:36.0,y:32.7,status:"运行",batt:91,task:"配送腻子 → RI-04",path:[[36,33],[30,42],[38,50],[45,42],[36,33]],sp:0.0042},
-      {id:"6#",x:29.5,y:24.6,status:"空闲",batt:55,task:"待命",path:[[29,25],[24,35],[32,42],[38,32],[29,25]],sp:0.003}
+      {id:"1#",x:72.0,y:34.0,status:"运行",batt:86,task:"配送 WP20261019007 → ADV-01",path:[[72,34],[75.5,37],[72,40],[68.5,37],[72,34]],sp:0.0045},
+      {id:"2#",x:56.0,y:42.0,status:"运行",batt:72,task:"配送钢筋网片 → RI-01",path:[[56,42],[59.5,45],[56,48],[52.5,45],[56,42]],sp:0.004},
+      {id:"3#",x:48.5,y:36.0,status:"充电",batt:23,task:"返回充电桩",path:[[48.5,36],[52,39],[48.5,42],[45,39],[48.5,36]],sp:0.0032},
+      {id:"4#",x:40.0,y:46.0,status:"运行",batt:64,task:"转运地砖至 RI-03",path:[[40,46],[43.5,49],[40,52],[36.5,49],[40,46]],sp:0.0038},
+      {id:"5#",x:30.0,y:45.0,status:"运行",batt:91,task:"配送腻子 → RI-04",path:[[30,45],[33.5,48],[30,51],[26.5,48],[30,45]],sp:0.0042},
+      {id:"6#",x:22.0,y:50.0,status:"空闲",batt:55,task:"待命",path:[[22,50],[25.5,53],[22,56],[18.5,53],[22,50]],sp:0.003}
     ],
-    arms:[[30,31],[46,29],[58,25],[67,38],[75,50]] },
+    arms:[[31.0,34.0],[34.6,37.4],[43.2,44.8],[51.6,33.6],[69.6,44.6]] },
   f2:{ name:"2F 拼装区域", tag:"拼装区 · 2F", img:null, mul:0.63, off:{pct:2},
     stations:[
       mkSta("S01","墙板拼装台 A","ADV-01",24,30,"运行",tpl({progress:74,output:82,plan:110,takt:"31min 12s",step:4,module:"MP20261019021"})),
