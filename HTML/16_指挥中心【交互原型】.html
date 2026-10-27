@@ -158,8 +158,8 @@ img{user-select:none}
 #modelTag b{color:#EAF3FF;font-size:12px}
 #sceneCrumb{position:absolute;left:106px;bottom:9px;z-index:6;font-size:9px;color:#C3DAF4;letter-spacing:.5px;background:rgba(4,14,30,.52);padding:2px 7px;border-radius:3px}
 #floorNav{position:absolute;left:9px;top:9px;display:flex;flex-direction:column;gap:4px;z-index:8}
-.floor-btn{width:88px;height:21px;background:rgba(10,22,48,.82);border:1px solid #1F5290;border-radius:3px;
-  color:#A6C6E8;font-size:9.5px;text-align:left;padding-left:8px;transition:.15s}
+.floor-btn{width:68px;height:21px;background:rgba(10,22,48,.82);border:1px solid #1F5290;border-radius:3px;
+  color:#A6C6E8;font-size:10px;text-align:center;padding:0;letter-spacing:.5px;transition:.15s}
 .floor-btn:hover{color:#2EA3FF;border-color:#2EA3FF}
 .floor-btn.active{background:#2EA3FF;color:#04223A;font-weight:700;border-color:#2EA3FF}
 #viewNav{position:absolute;right:9px;top:9px;display:flex;flex-direction:column;gap:5px;z-index:8;align-items:center}
@@ -653,7 +653,7 @@ img{user-select:none}
           </div>
           <div id="markerLayer" data-page-node-id="3wfDxXenGjz0cf45CnoakI"></div>
           <div id="modelTag" data-page-node-id="prFB8AaOjXWCLB2kCNBmJD"><b data-page-node-id="esQcnMkZPsIzUh12K4vmLL">数字孪生产线</b><span id="modelTagSub" data-page-node-id="QJhfyVfJx2ijewT39kCk1V">脉动产线 · 1F</span></div>
-          <div id="sceneCrumb" data-page-node-id="CF2GBB1HWxL3pPgY6oOluX">当前场景：1F 脉动产线 × 生产综合 · 左右数据已联动</div>
+          <div id="sceneCrumb" data-page-node-id="CF2GBB1HWxL3pPgY6oOluX">当前场景：脉动产线 × 生产综合 · 左右数据已联动</div>
           <div id="floorNav" data-page-node-id="fkFbo7Ak2ziqAb4IDaYt4s"></div>
           <div id="viewNav" data-page-node-id="g7cmQDMEnR18G8t1GZ6dvx">
             <button class="vbtn" id="vHome" title="归位" data-page-node-id="A45R4iy4mOQzm8WGJPjNR6">归位</button>
@@ -784,7 +784,7 @@ function clock(){
 setInterval(clock, 1000); clock();
 
 /* ============================================================
-   楼层场景（1F/2F/3F）—— 仅影响中间模型区与少量计数联动
+   楼层场景（脉动产线 / 立式仓库）—— 仅影响中间模型区与少量计数联动
    ============================================================ */
 var STEPS = ["AGV送料","机械臂上料","视觉定位","多点拼装","成品下线"];
 
@@ -800,7 +800,7 @@ function tpl(o){ o=o||{}; return {
   progress:o.progress||72, output:o.output||79, plan:o.plan||110, takt:o.takt||"32min 23s", step:o.step||4}; }
 
 var FLOORS = {
-  f1:{ name:"1F 脉动产线", tag:"脉动产线 · 1F", img:IMG+"u71_south.png", mul:1, off:{pct:0},
+  f1:{ name:"脉动产线", tag:"脉动产线", img:IMG+"u71_south.png", mul:1, off:{pct:0},
     stations:[
       mkSta("P01","钢筋网片加工","RI-01",25.7,46.9,"运行",tpl({progress:88,output:96,plan:110,takt:"28min 10s",step:5,module:"MP20261019002"})),
       mkSta("P02","底板混凝土平整","RI-02",29,39.1,"运行",tpl({progress:64,output:71,plan:110,takt:"35min 02s",step:3,module:"MP20261019003"})),
@@ -824,7 +824,7 @@ var FLOORS = {
       {id:"6#",x:27.4,y:49.9,status:"空闲",batt:55,task:"待命",path:[[27.4,49.9],[30.2,52.4],[27.4,54.8],[24.5,52.4],[27.4,49.9]],sp:0.003}
     ],
     arms:[[34.6,37],[37.5,39.8],[44.5,45.7],[51.3,36.7],[65.9,45.6]] },
-  f2:{ name:"2F 立式仓库", tag:"立式仓库 · 2F", img:null, mul:0.37, off:{pct:4},
+  f2:{ name:"立式仓库", tag:"立式仓库", img:null, mul:0.37, off:{pct:4},
     stations:[
       mkSta("W01","入库口 A","IN-01",14.0,34.0,"运行",tpl({progress:90,output:99,plan:110,takt:"25min 10s",step:5,module:"IB20261019001"})),
       mkSta("W02","出库口 B","OUT-01",78.0,34.0,"运行",tpl({progress:85,output:94,plan:110,takt:"26min 22s",step:4,module:"OB20261019001"})),
@@ -844,7 +844,7 @@ var FLOORS = {
     arms:[[46.0,12.0],[20.0,20.0],[76.0,20.0],[52.0,58.0]] }
 };
 
-/* ---------- 2F/3F 模型占位图（内联 SVG，viewBox 与模型区宽高比一致） ---------- */
+/* ---------- 立式仓库模型占位图（内联 SVG，viewBox 与模型区宽高比一致） ---------- */
 function floorSvg(floor){
   var W=1000,H=460, g="";
   for(var x=0;x<=W;x+=50) g += '<line x1="'+x+'" y1="0" x2="'+x+'" y2="'+H+'" stroke="#1A3355" stroke-width="1"/>';
