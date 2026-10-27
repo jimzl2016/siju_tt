@@ -653,7 +653,7 @@ img{user-select:none}
           </div>
           <div id="markerLayer" data-page-node-id="3wfDxXenGjz0cf45CnoakI"></div>
           <div id="modelTag" data-page-node-id="prFB8AaOjXWCLB2kCNBmJD"><b data-page-node-id="esQcnMkZPsIzUh12K4vmLL">数字孪生产线</b><span id="modelTagSub" data-page-node-id="QJhfyVfJx2ijewT39kCk1V">脉动产线 · 1F</span></div>
-          <div id="sceneCrumb" data-page-node-id="CF2GBB1HWxL3pPgY6oOluX">当前场景：1F 产线区域 × 生产综合 · 左右数据已联动</div>
+          <div id="sceneCrumb" data-page-node-id="CF2GBB1HWxL3pPgY6oOluX">当前场景：1F 脉动产线 × 生产综合 · 左右数据已联动</div>
           <div id="floorNav" data-page-node-id="fkFbo7Ak2ziqAb4IDaYt4s"></div>
           <div id="viewNav" data-page-node-id="g7cmQDMEnR18G8t1GZ6dvx">
             <button class="vbtn" id="vHome" title="归位" data-page-node-id="A45R4iy4mOQzm8WGJPjNR6">归位</button>
@@ -800,7 +800,7 @@ function tpl(o){ o=o||{}; return {
   progress:o.progress||72, output:o.output||79, plan:o.plan||110, takt:o.takt||"32min 23s", step:o.step||4}; }
 
 var FLOORS = {
-  f1:{ name:"1F 产线区域", tag:"脉动产线 · 1F", img:IMG+"u71_south.png", mul:1, off:{pct:0},
+  f1:{ name:"1F 脉动产线", tag:"脉动产线 · 1F", img:IMG+"u71_south.png", mul:1, off:{pct:0},
     stations:[
       mkSta("P01","钢筋网片加工","RI-01",25.7,46.9,"运行",tpl({progress:88,output:96,plan:110,takt:"28min 10s",step:5,module:"MP20261019002"})),
       mkSta("P02","底板混凝土平整","RI-02",29,39.1,"运行",tpl({progress:64,output:71,plan:110,takt:"35min 02s",step:3,module:"MP20261019003"})),
@@ -824,42 +824,24 @@ var FLOORS = {
       {id:"6#",x:27.4,y:49.9,status:"空闲",batt:55,task:"待命",path:[[27.4,49.9],[30.2,52.4],[27.4,54.8],[24.5,52.4],[27.4,49.9]],sp:0.003}
     ],
     arms:[[34.6,37],[37.5,39.8],[44.5,45.7],[51.3,36.7],[65.9,45.6]] },
-  f2:{ name:"2F 拼装区域", tag:"拼装区 · 2F", img:null, mul:0.63, off:{pct:2},
+  f2:{ name:"2F 立式仓库", tag:"立式仓库 · 2F", img:null, mul:0.37, off:{pct:4},
     stations:[
-      mkSta("S01","墙板拼装台 A","ADV-01",24,30,"运行",tpl({progress:74,output:82,plan:110,takt:"31min 12s",step:4,module:"MP20261019021"})),
-      mkSta("S02","墙板拼装台 B","ADV-01",24,52,"运行",tpl({progress:66,output:73,plan:110,takt:"32min 48s",step:3,module:"MP20261019022"})),
-      mkSta("S03","焊接机器人 R1","ADV-02",42,24,"运行",tpl({progress:83,output:91,plan:110,takt:"27min 55s",step:4,module:"MP20261019023"})),
-      mkSta("S04","焊接机器人 R2","ADV-02",42,58,"待机",tpl({progress:47,output:52,plan:110,takt:"34min 20s",step:2,module:"MP20261019024",start:"13:00"})),
-      mkSta("S05","窗框安装位","ADV-03",60,34,"运行",tpl({progress:58,output:64,plan:110,takt:"35min 16s",step:3,module:"MP20261019025"})),
-      mkSta("S06","洁具柜体安装位","ADV-04",60,62,"故障",tpl({online:84,oee:63.5,run:4,wait:1,err:1,progress:29,output:32,plan:110,takt:"—",step:2,module:"MP20261019026"})),
-      mkSta("S07","顶板安装位","ADV-05",76,44,"运行",tpl({progress:71,output:78,plan:110,takt:"30min 38s",step:3,module:"MP20261019027"})),
-      mkSta("S08","拼装缓存区","BUF-01",78,68,"离线",tpl({online:0,oee:0,run:0,wait:0,err:0,progress:8,output:9,plan:110,takt:"—",step:1,module:"MP20261019028"}))
+      mkSta("W01","入库口 A","IN-01",14.0,34.0,"运行",tpl({progress:90,output:99,plan:110,takt:"25min 10s",step:5,module:"IB20261019001"})),
+      mkSta("W02","出库口 B","OUT-01",78.0,34.0,"运行",tpl({progress:85,output:94,plan:110,takt:"26min 22s",step:4,module:"OB20261019001"})),
+      mkSta("W03","库位 A1-A4","RACK-A",12.0,62.0,"运行",tpl({progress:70,output:77,plan:110,takt:"—",step:3,module:"ST-A"})),
+      mkSta("W04","库位 A5-A8","RACK-A",12.0,82.0,"待机",tpl({progress:44,output:48,plan:110,takt:"—",step:2,module:"ST-A",start:"14:00"})),
+      mkSta("W05","库位 B1-B4","RACK-B",48.0,62.0,"运行",tpl({progress:76,output:84,plan:110,takt:"—",step:3,module:"ST-B"})),
+      mkSta("W06","库位 B5-B8","RACK-B",48.0,82.0,"故障",tpl({online:80,oee:58.4,run:3,wait:1,err:1,progress:31,output:34,plan:110,takt:"—",step:2,module:"ST-B"})),
+      mkSta("W07","AGV 充电区","CHG-01",70.0,58.0,"运行",tpl({progress:100,output:110,plan:110,takt:"—",step:5,module:"CHG"})),
+      mkSta("W08","分拣复核位","SORT-01",44.0,17.0,"离线",tpl({online:0,oee:0,run:0,wait:0,err:0,progress:5,output:6,plan:110,takt:"—",step:1,module:"SRT"}))
     ],
     agvs:[
-      {id:"1#",x:32,y:42,status:"运行",batt:78,task:"配送墙板 → 拼装台 A",path:[[32,42],[24,38],[32,30],[40,38],[32,42]],sp:0.004},
-      {id:"2#",x:50,y:40,status:"运行",batt:66,task:"配送窗框 → 安装位",path:[[50,40],[58,36],[50,30],[42,36],[50,40]],sp:0.0036},
-      {id:"3#",x:68,y:52,status:"充电",batt:31,task:"返回充电桩",path:[[68,52],[76,48],[68,40],[60,48],[68,52]],sp:0.003},
-      {id:"4#",x:44,y:66,status:"空闲",batt:48,task:"待命",path:[[44,66],[36,62],[44,54],[52,62],[44,66]],sp:0.0028}
+      {id:"1#",x:32.0,y:44.0,status:"运行",batt:82,task:"入库搬运 A 区",path:[[32,44],[32,36],[35,40],[35,48],[32,44]],sp:0.0038},
+      {id:"2#",x:63.0,y:44.0,status:"运行",batt:59,task:"出库搬运 B 区",path:[[63,44],[63,36],[66,40],[66,48],[63,44]],sp:0.0034},
+      {id:"3#",x:35.0,y:74.0,status:"充电",batt:18,task:"充电中",path:[[35,74],[35,66],[38,70],[38,78],[35,74]],sp:0.0026},
+      {id:"4#",x:74.0,y:74.0,status:"空闲",batt:44,task:"待命",path:[[74,74],[74,66],[77,70],[77,78],[74,74]],sp:0.0024}
     ],
-    arms:[[34,32],[48,28],[64,40],[72,52]] },
-  f3:{ name:"3F 仓储区域", tag:"立体仓库 · 3F", img:null, mul:0.37, off:{pct:4},
-    stations:[
-      mkSta("W01","入库口 A","IN-01",20,36,"运行",tpl({progress:90,output:99,plan:110,takt:"25min 10s",step:5,module:"IB20261019001"})),
-      mkSta("W02","出库口 B","OUT-01",78,36,"运行",tpl({progress:85,output:94,plan:110,takt:"26min 22s",step:4,module:"OB20261019001"})),
-      mkSta("W03","库位 A1-A4","RACK-A",34,24,"运行",tpl({progress:70,output:77,plan:110,takt:"—",step:3,module:"ST-A"})),
-      mkSta("W04","库位 A5-A8","RACK-A",34,56,"待机",tpl({progress:44,output:48,plan:110,takt:"—",step:2,module:"ST-A",start:"14:00"})),
-      mkSta("W05","库位 B1-B4","RACK-B",52,24,"运行",tpl({progress:76,output:84,plan:110,takt:"—",step:3,module:"ST-B"})),
-      mkSta("W06","库位 B5-B8","RACK-B",52,56,"故障",tpl({online:80,oee:58.4,run:3,wait:1,err:1,progress:31,output:34,plan:110,takt:"—",step:2,module:"ST-B"})),
-      mkSta("W07","AGV 充电区","CHG-01",66,70,"运行",tpl({progress:100,output:110,plan:110,takt:"—",step:5,module:"CHG"})),
-      mkSta("W08","分拣复核位","SORT-01",64,20,"离线",tpl({online:0,oee:0,run:0,wait:0,err:0,progress:5,output:6,plan:110,takt:"—",step:1,module:"SRT"}))
-    ],
-    agvs:[
-      {id:"1#",x:28,y:46,status:"运行",batt:82,task:"入库搬运 A 区",path:[[28,46],[20,42],[28,34],[36,42],[28,46]],sp:0.0038},
-      {id:"2#",x:46,y:44,status:"运行",batt:59,task:"出库搬运 B 区",path:[[46,44],[54,40],[46,32],[38,40],[46,44]],sp:0.0034},
-      {id:"3#",x:60,y:52,status:"充电",batt:18,task:"充电中",path:[[60,52],[68,48],[60,40],[52,48],[60,52]],sp:0.0026},
-      {id:"4#",x:72,y:58,status:"空闲",batt:44,task:"待命",path:[[72,58],[80,54],[72,46],[64,54],[72,58]],sp:0.0024}
-    ],
-    arms:[[30,32],[48,30],[58,38],[70,30]] }
+    arms:[[46.0,12.0],[20.0,20.0],[76.0,20.0],[52.0,58.0]] }
 };
 
 /* ---------- 2F/3F 模型占位图（内联 SVG，viewBox 与模型区宽高比一致） ---------- */
@@ -867,9 +849,7 @@ function floorSvg(floor){
   var W=1000,H=460, g="";
   for(var x=0;x<=W;x+=50) g += '<line x1="'+x+'" y1="0" x2="'+x+'" y2="'+H+'" stroke="#1A3355" stroke-width="1"/>';
   for(var y=0;y<=H;y+=46) g += '<line x1="0" y1="'+y+'" x2="'+W+'" y2="'+y+'" stroke="#1A3355" stroke-width="1"/>';
-  var rooms = floor==="f2" ? [
-    [8,8,36,38,"墙板拼装区 A/B"],[52,8,40,34,"焊接区 R1/R2"],[8,56,36,36,"窗框/洁具安装区"],[52,52,40,40,"顶板安装 · 缓存区"]
-  ] : [
+  var rooms = [
     [6,10,26,32,"入库口 A"],[66,10,28,32,"出库口 B"],[6,52,26,36,"库位 A1-A8"],[40,52,26,36,"库位 B1-B8"],[40,10,20,26,"分拣复核"],[66,52,28,36,"AGV 充电区"]
   ];
   var r = "";
@@ -880,7 +860,7 @@ function floorSvg(floor){
   });
   return '<svg id="modelSvg" viewBox="0 0 '+W+' '+H+'" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;background:#101A28">'+
     g + r +
-    '<text x="'+W/2+'" y="'+(H-14)+'" fill="#44689A" font-size="16" text-anchor="middle">'+floor+' · 三维模型占位图（图片占位）</text></svg>';
+    '<text x="'+W/2+'" y="30" fill="#44689A" font-size="16" text-anchor="middle">'+floor+' · 三维模型占位图（图片占位）</text></svg>';
 }
 
 /* ============================================================
